@@ -503,84 +503,74 @@ window.addEventListener('load', () => {
     </nav>
 
     <!-- VIDEO HERO SECTION -->
-    <section class="video-hero">
-        <!-- Video Background -->
-        <div class="video-background">
-            <video 
-                id="heroVideo"
-                autoplay 
-                muted 
-                loop 
-                playsinline
-                poster="assets/video-poster.jpg"
-                preload="metadata"
-            >
-                <source src="assets/wilart-showcase-hd.mp4" type="video/mp4" media="(min-width: 1024px)">
-                <source src="assets/wilart-showcase-mobile.mp4" type="video/mp4" media="(max-width: 1023px)">
-                <source src="assets/wilart-showcase.webm" type="video/webm">
-                <img src="assets/hero-fallback.jpg" alt="Интерьеры от Wilart" class="w-full h-full object-cover">
-            </video>
-        </div>
+<section class="video-hero">
+    <!-- Video Background -->
+    <div class="video-background">
+        <video 
+            id="heroVideo"
+            autoplay 
+            muted 
+            loop 
+            playsinline
+            preload="auto"
+        >
+            <source src="assets/wilart-showcase-hd.mp4" type="video/mp4">
+            <source src="assets/wilart-showcase.webm" type="video/webm">
+            Ваш браузер не поддерживает видео.
+        </video>
+    </div>
 
-        <!-- Overlay -->
-        <div class="video-overlay"></div>
+    <!-- Overlay -->
+    <div class="video-overlay"></div>
 
-        <!-- Loader -->
-        <div class="video-loader" id="videoLoader">
-            <div class="text-center">
-                <div class="loader-spinner mx-auto mb-4"></div>
-                <p class="text-brand-gray text-xs tracking-[0.3em] uppercase">Загрузка видео</p>
+    <!-- Content -->
+    <div class="video-content max-w-[1440px] mx-auto px-6 lg:px-12 w-full">
+        <div class="max-w-3xl">
+            <div class="content-reveal inline-flex items-center gap-3 mb-8">
+                <div class="w-12 h-[1px] bg-brand-red"></div>
+                <span class="text-xs tracking-[0.4em] uppercase text-brand-red font-medium">С 2009 года</span>
             </div>
-        </div>
 
-        <!-- Content -->
-        <div class="video-content max-w-[1440px] mx-auto px-6 lg:px-12 w-full">
-            <div class="max-w-3xl">
-                <div class="content-reveal inline-flex items-center gap-3 mb-8">
-                    <div class="w-12 h-[1px] bg-brand-red"></div>
-                    <span class="text-xs tracking-[0.4em] uppercase text-brand-red font-medium">С 2009 года</span>
+            <h1 class="content-reveal delay-1 font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] tracking-tight text-white mb-6">
+                Мебель для<br>
+                <span class="text-brand-red italic font-light">гостиниц</span><br>
+                и ресторанов
+            </h1>
+
+            <p class="content-reveal delay-2 text-lg sm:text-xl text-brand-gray-light leading-relaxed mb-10 max-w-2xl font-light">
+                Комплексное оснащение премиальных интерьеров. 
+                Собственное производство. От проектирования до монтажа.
+            </p>
+
+            <div class="content-reveal delay-3 flex flex-col sm:flex-row gap-4">
+                <button onclick="scrollToContact()" class="btn-premium bg-brand-red text-white px-10 py-5 tracking-widest uppercase text-sm font-medium">
+                    Получить расчет проекта
+                </button>
+                <a href="#projects" class="group flex items-center justify-center gap-3 px-8 py-5 border border-white/30 hover:border-white/60 transition-all duration-300 backdrop-blur-sm">
+                    <span class="text-sm tracking-widest uppercase">Наши проекты</span>
+                    <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="content-reveal delay-3 grid grid-cols-3 gap-8 mt-16 pt-16 border-t border-white/10">
+                <div>
+                    <div class="font-serif text-4xl text-white mb-2">150+</div>
+                    <div class="text-xs tracking-widest uppercase text-brand-gray">Реализованных объектов</div>
                 </div>
-
-                <h1 class="content-reveal delay-1 font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] tracking-tight text-white mb-6">
-                    Мебель для<br>
-                    <span class="text-brand-red italic font-light">гостиниц</span><br>
-                    и ресторанов
-                </h1>
-
-                <p class="content-reveal delay-2 text-lg sm:text-xl text-brand-gray-light leading-relaxed mb-10 max-w-2xl font-light">
-                    Комплексное оснащение премиальных интерьеров. 
-                    Собственное производство. От проектирования до монтажа.
-                </p>
-
-                <div class="content-reveal delay-3 flex flex-col sm:flex-row gap-4">
-                    <button onclick="scrollToContact()" class="btn-premium bg-brand-red text-white px-10 py-5 tracking-widest uppercase text-sm font-medium">
-                        Получить расчет проекта
-                    </button>
-                    <a href="#projects" class="group flex items-center justify-center gap-3 px-8 py-5 border border-white/30 hover:border-white/60 transition-all duration-300 backdrop-blur-sm">
-                        <span class="text-sm tracking-widest uppercase">Наши проекты</span>
-                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
+                <div>
+                    <div class="font-serif text-4xl text-white mb-2">15</div>
+                    <div class="text-xs tracking-widest uppercase text-brand-gray">Лет опыта</div>
                 </div>
-
-                <div class="content-reveal delay-3 grid grid-cols-3 gap-8 mt-16 pt-16 border-t border-white/10">
-                    <div>
-                        <div class="font-serif text-4xl text-white mb-2">150+</div>
-                        <div class="text-xs tracking-widest uppercase text-brand-gray">Реализованных объектов</div>
-                    </div>
-                    <div>
-                        <div class="font-serif text-4xl text-white mb-2">15</div>
-                        <div class="text-xs tracking-widest uppercase text-brand-gray">Лет опыта</div>
-                    </div>
-                    <div>
-                        <div class="font-serif text-4xl text-white mb-2">100%</div>
-                        <div class="text-xs tracking-widest uppercase text-brand-gray">Соблюдение сроков</div>
-                    </div>
+                <div>
+                    <div class="font-serif text-4xl text-white mb-2">100%</div>
+                    <div class="text-xs tracking-widest uppercase text-brand-gray">Соблюдение сроков</div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Marquee Strip -->
     <div class="bg-brand-red py-4 overflow-hidden">
