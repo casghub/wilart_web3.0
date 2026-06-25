@@ -664,96 +664,103 @@ window.addEventListener('load', () => {
     </section>
 
     <!-- Services Section -->
-    <section class="bg-brand-dark py-24 lg:py-32 relative">
-        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
-            <div class="text-center mb-20 reveal">
-                <div class="flex items-center justify-center gap-4 mb-6">
-                    <div class="w-12 h-[1px] bg-brand-red"></div>
-                    <span class="text-xs tracking-[0.4em] uppercase text-brand-red font-medium">Направления</span>
-                    <div class="w-12 h-[1px] bg-brand-red"></div>
+<section class="bg-brand-dark py-24 lg:py-32 relative">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <div class="text-center mb-20 reveal">
+            <div class="flex items-center justify-center gap-4 mb-6">
+                <div class="w-12 h-[1px] bg-brand-red"></div>
+                <span class="text-xs tracking-[0.4em] uppercase text-brand-red font-medium">Направления</span>
+                <div class="w-12 h-[1px] bg-brand-red"></div>
+            </div>
+            <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-white">
+                Что мы <span class="italic text-brand-gray-light font-light">создаём</span>
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Service 1: Гостиницы -->
+            <div class="reveal reveal-delay-1 premium-card group cursor-pointer">
+                <div class="relative aspect-[3/4] overflow-hidden rounded-sm">
+                    <img 
+                        src="assets/hotel-rooms.jpg" 
+                        alt="Мебель для гостиничных номеров"
+                        class="card-image absolute inset-0 w-full h-full object-cover"
+                        loading="lazy"
+                    >
+                    <!-- Затемнение по умолчанию, чтобы текст читался -->
+                    <div class="absolute inset-0 bg-brand-black/40 transition-opacity duration-500 group-hover:opacity-0"></div>
+                    <!-- Оверлей с текстом при наведении -->
+                    <div class="card-overlay absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent opacity-0 flex items-end">
+                        <div class="p-8">
+                            <div class="text-white font-serif text-2xl mb-2">Гостиницы</div>
+                            <p class="text-brand-gray-light text-sm leading-relaxed mb-4">Оснащение номерного фонда, лобби и общественных зон. Полный цикл от проектирования до монтажа.</p>
+                            <div class="flex items-center gap-2 text-brand-red text-sm tracking-widest uppercase">
+                                <span>Подробнее</span>
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Подпись снизу (видна всегда) -->
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <p class="text-white text-sm tracking-widest uppercase font-medium drop-shadow-lg">Гостиничные номера</p>
+                    </div>
                 </div>
-                <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-white">
-                    Что мы <span class="italic text-brand-gray-light font-light">создаём</span>
-                </h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="reveal reveal-delay-1 premium-card group cursor-pointer">
-                    <div class="relative aspect-[3/4] overflow-hidden rounded-sm">
-                        <div class="img-placeholder w-full h-full card-image flex items-center justify-center">
-                            <div class="text-center p-8">
-                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="0.5" stroke-linecap="round" class="mx-auto mb-4">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-                                    <polyline points="9 22 9 12 15 12 15 22"/>
-                                </svg>
-                                <p class="text-brand-gray text-xs tracking-widest uppercase">Гостиничные номера</p>
-                            </div>
-                        </div>
-                        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/50 to-transparent opacity-0 flex items-end">
-                            <div class="p-8">
-                                <div class="text-white font-serif text-2xl mb-2">Гостиницы</div>
-                                <p class="text-brand-gray-light text-sm leading-relaxed mb-4">Оснащение номерного фонда, лобби и общественных зон. Полный цикл от проектирования до монтажа.</p>
-                                <div class="flex items-center gap-2 text-brand-red text-sm tracking-widest uppercase">
-                                    <span>Подробнее</span>
-                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                </div>
+            <!-- Service 2: Рестораны -->
+            <div class="reveal reveal-delay-2 premium-card group cursor-pointer">
+                <div class="relative aspect-[3/4] overflow-hidden rounded-sm">
+                    <img 
+                        src="assets/restaurants.jpg" 
+                        alt="Мебель для ресторанов и баров"
+                        class="card-image absolute inset-0 w-full h-full object-cover"
+                        loading="lazy"
+                    >
+                    <div class="absolute inset-0 bg-brand-black/40 transition-opacity duration-500 group-hover:opacity-0"></div>
+                    <div class="card-overlay absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent opacity-0 flex items-end">
+                        <div class="p-8">
+                            <div class="text-white font-serif text-2xl mb-2">Рестораны</div>
+                            <p class="text-brand-gray-light text-sm leading-relaxed mb-4">Индивидуальная мебель под концепцию заведения. Барные стойки, столы, мягкие зоны.</p>
+                            <div class="flex items-center gap-2 text-brand-red text-sm tracking-widest uppercase">
+                                <span>Подробнее</span>
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                             </div>
                         </div>
                     </div>
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <p class="text-white text-sm tracking-widest uppercase font-medium drop-shadow-lg">Рестораны и бары</p>
+                    </div>
                 </div>
+            </div>
 
-                <div class="reveal reveal-delay-2 premium-card group cursor-pointer">
-                    <div class="relative aspect-[3/4] overflow-hidden rounded-sm">
-                        <div class="img-placeholder w-full h-full card-image flex items-center justify-center">
-                            <div class="text-center p-8">
-                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="0.5" stroke-linecap="round" class="mx-auto mb-4">
-                                    <path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/>
-                                    <line x1="6" y1="1" x2="6" y2="4"/>
-                                    <line x1="10" y1="1" x2="10" y2="4"/>
-                                    <line x1="14" y1="1" x2="14" y2="4"/>
-                                </svg>
-                                <p class="text-brand-gray text-xs tracking-widest uppercase">Рестораны и бары</p>
-                            </div>
-                        </div>
-                        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/50 to-transparent opacity-0 flex items-end">
-                            <div class="p-8">
-                                <div class="text-white font-serif text-2xl mb-2">Рестораны</div>
-                                <p class="text-brand-gray-light text-sm leading-relaxed mb-4">Индивидуальная мебель под концепцию заведения. Барные стойки, столы, мягкие зоны.</p>
-                                <div class="flex items-center gap-2 text-brand-red text-sm tracking-widest uppercase">
-                                    <span>Подробнее</span>
-                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                </div>
+            <!-- Service 3: Апарт-отели -->
+            <div class="reveal reveal-delay-3 premium-card group cursor-pointer">
+                <div class="relative aspect-[3/4] overflow-hidden rounded-sm">
+                    <img 
+                        src="assets/apart-hotels.jpg" 
+                        alt="Мебель для апарт-отелей"
+                        class="card-image absolute inset-0 w-full h-full object-cover"
+                        loading="lazy"
+                    >
+                    <div class="absolute inset-0 bg-brand-black/40 transition-opacity duration-500 group-hover:opacity-0"></div>
+                    <div class="card-overlay absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent opacity-0 flex items-end">
+                        <div class="p-8">
+                            <div class="text-white font-serif text-2xl mb-2">Апарт-отели</div>
+                            <p class="text-brand-gray-light text-sm leading-relaxed mb-4">Компактные решения с кухонными блоками. Мебель под интенсивную эксплуатацию.</p>
+                            <div class="flex items-center gap-2 text-brand-red text-sm tracking-widest uppercase">
+                                <span>Подробнее</span>
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="reveal reveal-delay-3 premium-card group cursor-pointer">
-                    <div class="relative aspect-[3/4] overflow-hidden rounded-sm">
-                        <div class="img-placeholder w-full h-full card-image flex items-center justify-center">
-                            <div class="text-center p-8">
-                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="0.5" stroke-linecap="round" class="mx-auto mb-4">
-                                    <rect x="2" y="4" width="20" height="16" rx="2"/>
-                                    <path d="M2 8h20M8 4v16"/>
-                                </svg>
-                                <p class="text-brand-gray text-xs tracking-widest uppercase">Апарт-отели</p>
-                            </div>
-                        </div>
-                        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/50 to-transparent opacity-0 flex items-end">
-                            <div class="p-8">
-                                <div class="text-white font-serif text-2xl mb-2">Апарт-отели</div>
-                                <p class="text-brand-gray-light text-sm leading-relaxed mb-4">Компактные решения с кухонными блоками. Мебель под интенсивную эксплуатацию.</p>
-                                <div class="flex items-center gap-2 text-brand-red text-sm tracking-widest uppercase">
-                                    <span>Подробнее</span>
-                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <p class="text-white text-sm tracking-widest uppercase font-medium drop-shadow-lg">Апарт-отели</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Projects / Cases Section -->
     <section id="projects" class="bg-brand-black py-24 lg:py-32">
