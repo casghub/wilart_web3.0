@@ -783,64 +783,61 @@ window.addEventListener('load', () => {
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-24 reveal">
-                <div class="relative aspect-[4/3] lg:aspect-square overflow-hidden rounded-sm group">
-                    <div class="img-placeholder w-full h-full card-image flex items-center justify-center">
-                        <div class="text-center">
-                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="0.5" stroke-linecap="round" class="mx-auto mb-4">
-                                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                                <circle cx="8.5" cy="8.5" r="1.5"/>
-                                <path d="M21 15l-5-5L5 21"/>
-                            </svg>
-                            <p class="text-brand-gray text-sm tracking-widest uppercase">Апарт-отель «Москва Сити»</p>
-                        </div>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-transparent"></div>
-                    <div class="absolute bottom-8 left-8">
-                        <div class="flex items-center gap-3 mb-2">
-                            <span class="text-brand-red text-xs tracking-widest uppercase">Апарт-отель</span>
-                            <div class="w-6 h-[1px] bg-brand-red"></div>
-                            <span class="text-brand-gray text-xs">2024</span>
-                        </div>
-                        <h3 class="font-serif text-3xl text-white">Оснащение апарт-отеля<br>в Москва-Сити</h3>
-                    </div>
-                </div>
-                <div class="flex flex-col justify-center space-y-8">
-                    <div class="space-y-6">
-                        <p class="text-brand-gray leading-relaxed font-light text-lg">
-                            Полный цикл оснащения 84 номеров апарт-отеля премиум-класса. Работа по дизайн-проекту с соблюдением всех авторских задумок.
-                        </p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="border-l border-brand-red/30 pl-6">
-                            <div class="font-serif text-3xl text-white mb-1">84</div>
-                            <div class="text-xs tracking-widest uppercase text-brand-gray">номера</div>
-                        </div>
-                        <div class="border-l border-brand-red/30 pl-6">
-                            <div class="font-serif text-3xl text-white mb-1">45</div>
-                            <div class="text-xs tracking-widest uppercase text-brand-gray">дней срок</div>
-                        </div>
-                        <div class="border-l border-brand-red/30 pl-6">
-                            <div class="font-serif text-3xl text-white mb-1">100%</div>
-                            <div class="text-xs tracking-widest uppercase text-brand-gray">в срок</div>
-                        </div>
-                        <div class="border-l border-brand-red/30 pl-6">
-                            <div class="font-serif text-3xl text-white mb-1">П+М</div>
-                            <div class="text-xs tracking-widest uppercase text-brand-gray">производство + монтаж</div>
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Кровати</span>
-                        <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Шкафы</span>
-                        <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Кухонные блоки</span>
-                        <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Ресепшен</span>
-                        <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Лобби</span>
-                    </div>
-                    <button onclick="scrollToContact()" class="btn-premium bg-brand-red text-white px-8 py-4 tracking-widest uppercase text-sm font-medium self-start">
-                        Обсудить ваш проект
-                    </button>
-                </div>
+           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-24 reveal">
+    <div class="relative aspect-[4/3] lg:aspect-square overflow-hidden rounded-sm group">
+        <!-- РЕАЛЬНОЕ ИЗОБРАЖЕНИЕ -->
+        <img 
+            src="assets/garden-street.jpg" 
+            alt="Оснащение отеля Garden Street"
+            class="card-image absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+        >
+        <div class="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-8 left-8">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="text-brand-red text-xs tracking-widest uppercase">Отель</span>
+                <div class="w-6 h-[1px] bg-brand-red"></div>
+                <span class="text-brand-gray text-xs">2024</span>
             </div>
+            <h3 class="font-serif text-3xl text-white">Оснащение отеля<br>«Garden street»</h3>
+        </div>
+    </div>
+    <div class="flex flex-col justify-center space-y-8">
+        <div class="space-y-6">
+            <p class="text-brand-gray leading-relaxed font-light text-lg">
+                Полный цикл оснащения 84 номеров отеля премиум-класса. Работа по дизайн-проекту с соблюдением всех авторских задумок.
+            </p>
+        </div>
+        <div class="grid grid-cols-2 gap-6">
+            <div class="border-l border-brand-red/30 pl-6">
+                <div class="font-serif text-3xl text-white mb-1">84</div>
+                <div class="text-xs tracking-widest uppercase text-brand-gray">номера</div>
+            </div>
+            <div class="border-l border-brand-red/30 pl-6">
+                <div class="font-serif text-3xl text-white mb-1">45</div>
+                <div class="text-xs tracking-widest uppercase text-brand-gray">дней срок</div>
+            </div>
+            <div class="border-l border-brand-red/30 pl-6">
+                <div class="font-serif text-3xl text-white mb-1">100%</div>
+                <div class="text-xs tracking-widest uppercase text-brand-gray">в срок</div>
+            </div>
+            <div class="border-l border-brand-red/30 pl-6">
+                <div class="font-serif text-3xl text-white mb-1">П+М</div>
+                <div class="text-xs tracking-widest uppercase text-brand-gray">производство + монтаж</div>
+            </div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+            <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Кровати</span>
+            <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Шкафы</span>
+            <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Кухонные блоки</span>
+            <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Ресепшен</span>
+            <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Лобби</span>
+        </div>
+        <button onclick="scrollToContact()" class="btn-premium bg-brand-red text-white px-8 py-4 tracking-widest uppercase text-sm font-medium self-start">
+            Обсудить ваш проект
+        </button>
+    </div>
+</div>
 
             <div class="section-divider mb-24"></div>
 
@@ -848,7 +845,7 @@ window.addEventListener('load', () => {
                 <div class="order-2 lg:order-1 flex flex-col justify-center space-y-8">
                     <div class="space-y-6">
                         <p class="text-brand-gray leading-relaxed font-light text-lg">
-                            Комплексное оснащение бутик-отеля на 32 номера в историческом центре Санкт-Петербурга. Работа в три этапа поставки с координацией строительных работ.
+                            Комплексное оснащение отеля на 32 номера в историческом центре Санкт-Петербурга. Работа в три этапа поставки с координацией строительных работ.
                         </p>
                     </div>
                     <div class="grid grid-cols-2 gap-6">
@@ -880,29 +877,23 @@ window.addEventListener('load', () => {
                     </button>
                 </div>
                 <div class="relative aspect-[4/3] lg:aspect-square overflow-hidden rounded-sm group">
-                    <div class="img-placeholder w-full h-full card-image flex items-center justify-center">
-                        <div class="text-center">
-                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="0.5" stroke-linecap="round" class="mx-auto mb-4">
-                                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                                <circle cx="8.5" cy="8.5" r="1.5"/>
-                                <path d="M21 15l-5-5L5 21"/>
-                            </svg>
-                            <p class="text-brand-gray text-sm tracking-widest uppercase">Бутик-отель «Невский»</p>
-                        </div>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-transparent"></div>
-                    <div class="absolute bottom-8 left-8">
-                        <div class="flex items-center gap-3 mb-2">
-                            <span class="text-brand-gold text-xs tracking-widest uppercase">Бутик-отель</span>
-                            <div class="w-6 h-[1px] bg-brand-gold"></div>
-                            <span class="text-brand-gray text-xs">2023</span>
-                        </div>
-                        <h3 class="font-serif text-3xl text-white">Бутик-отель<br>в Санкт-Петербурге</h3>
-                    </div>
-                </div>
+                     <img 
+            src="assets/vvedensky.jpg" 
+            alt="Оснащение отеля Введенский в Санкт-Петербурге"
+            class="card-image absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+        >
+        <div class="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-8 left-8">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="text-brand-gold text-xs tracking-widest uppercase">Отель</span>
+                <div class="w-6 h-[1px] bg-brand-gold"></div>
+                <span class="text-brand-gray text-xs">2023</span>
             </div>
+            <h3 class="font-serif text-3xl text-white">Отель<br>в Санкт-Петербурге</h3>
         </div>
-    </section>
+    </div>
+</div>
 
     <!-- Process Section -->
     <section id="process" class="bg-brand-dark py-24 lg:py-32 relative">
