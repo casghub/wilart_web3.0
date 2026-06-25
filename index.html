@@ -1,4 +1,23 @@
-<!DOCTYPE html>
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+
+                .preloader-logo {
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+
+
+              </style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -73,18 +92,23 @@
             display: flex;
             z-index: 1;
         }
+
+        /* СЛЕВА — ЧЁРНЫЙ */
         .split-left {
             width: 50%;
             height: 100%;
             background: #111111;
             transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
         }
+
+        /* СПРАВА — БЕЛЫЙ */
         .split-right {
             width: 50%;
             height: 100%;
             background: #ffffff;
             transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
         }
+
         #preloader.split .split-left {
             transform: translateX(-100%);
         }
@@ -104,22 +128,25 @@
             align-items: center;
             gap: 24px;
         }
+
+        /* УВЕЛИЧЕННЫЙ ЛОГОТИП — без инверсии */
         .preloader-logo {
-            height: 72px;
+            height: 140px;
             width: auto;
+            max-width: 80vw;
             object-fit: contain;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            filter: brightness(0) invert(1);
         }
         .preloader-logo.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
         .preloader-subtitle {
             font-family: 'Inter', sans-serif;
-            font-size: 10px;
+            font-size: 11px;
             letter-spacing: 0.4em;
             text-transform: uppercase;
             color: #888888;
@@ -173,18 +200,6 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-60px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(60px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
         @keyframes shimmer {
             0% { background-position: -200% 0; }
             100% { background-position: 200% 0; }
@@ -192,22 +207,6 @@
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
-        }
-        @keyframes pulse-border {
-            0%, 100% { border-color: rgba(196, 26, 32, 0.3); }
-            50% { border-color: rgba(196, 26, 32, 0.8); }
-        }
-        @keyframes count-up {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes line-expand {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        @keyframes rotate-slow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
         @keyframes spin {
             to { transform: rotate(360deg); }
@@ -221,9 +220,6 @@
 
         .animate-fadeInUp { animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .animate-fadeIn { animation: fadeIn 1.2s ease-out forwards; }
-        .animate-slideInLeft { animation: slideInLeft 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .animate-slideInRight { animation: slideInRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .animate-scaleIn { animation: scaleIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .animate-float { animation: float 6s ease-in-out infinite; }
 
         .reveal {
@@ -266,10 +262,6 @@
             height: 1px;
             background: linear-gradient(90deg, transparent, #c41a20, transparent);
         }
-        .line-vertical {
-            width: 1px;
-            background: linear-gradient(180deg, transparent, #c41a20, transparent);
-        }
 
         .glass {
             background: rgba(255, 255, 255, 0.03);
@@ -297,16 +289,6 @@
             box-shadow: 0 10px 40px rgba(196, 26, 32, 0.3);
         }
 
-        .counter-value {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        .counter-value.visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
         .nav-link {
             position: relative;
         }
@@ -324,27 +306,9 @@
             width: 100%;
         }
 
-        .img-placeholder {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        .img-placeholder::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%);
-            background-size: 200% 100%;
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
         .section-divider {
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-        }
-
-        .magnetic-btn {
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .sticky-cta {
@@ -361,14 +325,6 @@
         }
         .marquee-track {
             animation: marquee 30s linear infinite;
-        }
-
-        .img-reveal {
-            clip-path: inset(0 100% 0 0);
-            transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .img-reveal.visible {
-            clip-path: inset(0 0% 0 0);
         }
 
         /* Video Hero Styles */
@@ -392,7 +348,6 @@
             height: 100%;
             object-fit: cover;
             transform: scale(1.05);
-            will-change: transform;
         }
 
         .video-overlay {
@@ -437,9 +392,53 @@
         .content-reveal.delay-2 { animation-delay: 0.5s; }
         .content-reveal.delay-3 { animation-delay: 0.7s; }
 
-        /* ============================================
-           MOBILE ADAPTATIONS
-           ============================================ */
+        /* Production Video Section */
+        .production-video-section {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .production-video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .production-video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .production-video-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(10, 10, 10, 0.9) 0%,
+                rgba(10, 10, 10, 0.7) 50%,
+                rgba(10, 10, 10, 0.9) 100%
+            );
+            z-index: 1;
+        }
+
+        .production-video-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 24px;
+        }
+
+        /* Mobile Adaptations */
         @media (max-width: 768px) {
             .video-overlay {
                 background: linear-gradient(
@@ -453,9 +452,10 @@
                 padding-top: 100px;
                 padding-bottom: 60px;
             }
-            
+
+            /* УВЕЛИЧЕННЫЙ ЛОГОТИП НА МОБИЛЬНЫХ */
             .preloader-logo { 
-                height: 56px; 
+                height: 100px; 
             }
             .preloader-subtitle { 
                 font-size: 9px; 
@@ -466,12 +466,8 @@
                 gap: 16px;
             }
 
-            .font-serif {
-                font-size: inherit;
-            }
-
-            h1, h2, h3 {
-                word-break: break-word;
+            .production-video-section {
+                height: 400px;
             }
         }
 
@@ -480,7 +476,6 @@
             .hero-visual { display: none !important; }
         }
 
-        /* Touch-friendly improvements */
         @media (hover: none) and (pointer: coarse) {
             .premium-card:hover {
                 transform: none;
@@ -496,14 +491,12 @@
             }
         }
 
-        /* Fix iOS viewport height */
         @supports (-webkit-touch-callout: none) {
             .video-hero {
                 min-height: -webkit-fill-available;
             }
         }
 
-        /* Improve tap targets */
         a, button {
             min-height: 44px;
             min-width: 44px;
@@ -537,9 +530,9 @@
 
                 <div class="hidden lg:flex items-center gap-10">
                     <a href="#about" class="nav-link text-sm tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">О нас</a>
+                    <a href="#production" class="nav-link text-sm tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Производство</a>
                     <a href="#projects" class="nav-link text-sm tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Проекты</a>
                     <a href="#process" class="nav-link text-sm tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Процесс</a>
-                    <a href="#clients" class="nav-link text-sm tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Клиенты</a>
                     <a href="#contact" class="nav-link text-sm tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Контакты</a>
                 </div>
 
@@ -561,9 +554,9 @@
         <div id="mobileMenu" class="lg:hidden hidden bg-brand-black/98 backdrop-blur-xl border-t border-white/5">
             <div class="px-6 py-8 space-y-6">
                 <a href="#about" class="block text-lg tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">О нас</a>
+                <a href="#production" class="block text-lg tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Производство</a>
                 <a href="#projects" class="block text-lg tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Проекты</a>
                 <a href="#process" class="block text-lg tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Процесс</a>
-                <a href="#clients" class="block text-lg tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Клиенты</a>
                 <a href="#contact" class="block text-lg tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Контакты</a>
                 <div class="pt-6 border-t border-white/10 flex flex-col gap-4">
                     <a href="tel:+78001234567" class="text-white tracking-wide">+7 (800) 123-45-67</a>
@@ -699,8 +692,8 @@
                         </p>
                     </div>
                     <div class="reveal reveal-delay-2">
-                        <a href="#process" class="group inline-flex items-center gap-3 text-brand-red hover:text-white transition-colors duration-300">
-                            <span class="text-sm tracking-widest uppercase">Как мы работаем</span>
+                        <a href="#production" class="group inline-flex items-center gap-3 text-brand-red hover:text-white transition-colors duration-300">
+                            <span class="text-sm tracking-widest uppercase">Смотреть производство</span>
                             <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                         </a>
                     </div>
@@ -727,6 +720,78 @@
                         <div class="text-sm tracking-widest uppercase text-brand-gray mb-2">Специалистов</div>
                         <div class="w-8 h-[1px] bg-brand-red transition-all duration-500 group-hover:w-16"></div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         PRODUCTION VIDEO SECTION
+         ============================================ -->
+    <section id="production" class="production-video-section">
+        <div class="production-video-background">
+            <video 
+                id="productionVideo"
+                autoplay 
+                muted 
+                loop 
+                playsinline
+                preload="metadata"
+            >
+                <source src="assets/production.mp4" type="video/mp4">
+                <source src="assets/production.webm" type="video/webm">
+            </video>
+        </div>
+
+        <div class="production-video-overlay"></div>
+
+        <div class="production-video-content">
+            <div class="reveal">
+                <div class="flex items-center justify-center gap-4 mb-6">
+                    <div class="w-12 h-[1px] bg-brand-red"></div>
+                    <span class="text-xs tracking-[0.4em] uppercase text-brand-red font-medium">Производство</span>
+                    <div class="w-12 h-[1px] bg-brand-red"></div>
+                </div>
+                
+                <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-white mb-6">
+                    Полный цикл<br>
+                    <span class="italic text-brand-gray-light font-light">изготовления мебели</span>
+                </h2>
+                
+                <p class="text-lg sm:text-xl text-brand-gray-light leading-relaxed mb-8 max-w-2xl mx-auto font-light">
+                    Современное оборудование, опытные мастера, контроль качества на каждом этапе
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button onclick="scrollToContact()" class="btn-premium bg-brand-red text-white px-10 py-5 tracking-widest uppercase text-sm font-medium">
+                        Обсудить ваш проект
+                    </button>
+                    <a href="#process" class="group flex items-center gap-3 text-brand-gray-light hover:text-white transition-colors">
+                        <span class="text-sm tracking-widest uppercase">Как мы работаем</span>
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Production Stats -->
+            <div class="reveal reveal-delay-2 grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-8 border-t border-white/10 max-w-4xl mx-auto">
+                <div class="text-center">
+                    <div class="font-serif text-3xl sm:text-4xl text-white mb-2">5000+</div>
+                    <div class="text-xs tracking-widest uppercase text-brand-gray">м² площадь</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-serif text-3xl sm:text-4xl text-white mb-2">50+</div>
+                    <div class="text-xs tracking-widest uppercase text-brand-gray">Единиц оборудования</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-serif text-3xl sm:text-4xl text-white mb-2">120+</div>
+                    <div class="text-xs tracking-widest uppercase text-brand-gray">Специалистов</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-serif text-3xl sm:text-4xl text-white mb-2">24/7</div>
+                    <div class="text-xs tracking-widest uppercase text-brand-gray">Режим работы</div>
                 </div>
             </div>
         </div>
@@ -1209,9 +1274,9 @@
                     <h4 class="text-white text-sm tracking-widest uppercase mb-6">Навигация</h4>
                     <ul class="space-y-3">
                         <li><a href="#about" class="text-brand-gray hover:text-white transition-colors text-sm font-light">О компании</a></li>
+                        <li><a href="#production" class="text-brand-gray hover:text-white transition-colors text-sm font-light">Производство</a></li>
                         <li><a href="#projects" class="text-brand-gray hover:text-white transition-colors text-sm font-light">Проекты</a></li>
                         <li><a href="#process" class="text-brand-gray hover:text-white transition-colors text-sm font-light">Процесс</a></li>
-                        <li><a href="#clients" class="text-brand-gray hover:text-white transition-colors text-sm font-light">Клиенты</a></li>
                         <li><a href="#contact" class="text-brand-gray hover:text-white transition-colors text-sm font-light">Контакты</a></li>
                     </ul>
                 </div>
@@ -1325,24 +1390,44 @@
 
         document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
-        // Video
-        const video = document.getElementById('heroVideo');
-        if (video) {
-            video.addEventListener('error', () => {
-                console.log('Video error, fallback to static background');
+        // Hero Video
+        const heroVideo = document.getElementById('heroVideo');
+        if (heroVideo) {
+            heroVideo.addEventListener('error', () => {
+                console.log('Hero video error, fallback to static background');
             });
 
-            const videoObserver = new IntersectionObserver((entries) => {
+            const heroVideoObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        video.play().catch(() => {});
+                        heroVideo.play().catch(() => {});
                     } else {
-                        video.pause();
+                        heroVideo.pause();
                     }
                 });
             }, { threshold: 0.1 });
 
-            videoObserver.observe(video);
+            heroVideoObserver.observe(heroVideo);
+        }
+
+        // Production Video
+        const productionVideo = document.getElementById('productionVideo');
+        if (productionVideo) {
+            productionVideo.addEventListener('error', () => {
+                console.log('Production video error');
+            });
+
+            const productionVideoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        productionVideo.play().catch(() => {});
+                    } else {
+                        productionVideo.pause();
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            productionVideoObserver.observe(productionVideo);
         }
 
         // Navbar scroll effect
@@ -1419,3 +1504,11 @@
 </body>
 </html>
 
+
+
+              <script>
+                              
+              </script>
+                        </body>
+                        </html>
+                    
