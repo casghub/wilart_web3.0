@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Wilart — премиальная мебель для гостиниц и HoReCa на заказ от производителя">
     <title>Wilart — Премиальная мебель для гостиниц и HoReCa</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,13 +43,127 @@
     </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
         body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; }
         
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        /* ============================================
+           PREMIUM PRELOADER
+           ============================================ */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: #111111;
+            overflow: hidden;
+            transition: opacity 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        #preloader.hidden-preloader {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .split-bg {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            z-index: 1;
+        }
+        .split-left {
+            width: 50%;
+            height: 100%;
+            background: #111111;
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .split-right {
+            width: 50%;
+            height: 100%;
+            background: #ffffff;
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        #preloader.split .split-left {
+            transform: translateX(-100%);
+        }
+        #preloader.split .split-right {
+            transform: translateX(100%);
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+        .preloader-logo {
+            height: 72px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: brightness(0) invert(1);
+        }
+        .preloader-logo.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .preloader-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #888888;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .preloader-subtitle.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #d91e25;
+            z-index: 5;
+            transform: translateY(-50%);
+            transition: width 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        #preloader.reveal .reveal-line {
+            width: 100%;
+        }
+
+        .hero-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .hero-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #mainNav {
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        #mainNav.visible {
+            opacity: 1;
+        }
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(50px); }
@@ -170,6 +285,7 @@
             position: relative;
             overflow: hidden;
             transition: all 0.4s ease;
+            min-height: 44px;
         }
         .btn-premium::before {
             content: '';
@@ -324,32 +440,9 @@
         .content-reveal.delay-2 { animation-delay: 0.5s; }
         .content-reveal.delay-3 { animation-delay: 0.7s; }
 
-        .video-loader {
-            position: absolute;
-            inset: 0;
-            z-index: 20;
-            background: #0a0a0a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.5s ease, visibility 0.5s;
-        }
-
-        .video-loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .loader-spinner {
-            width: 48px;
-            height: 48px;
-            border: 2px solid rgba(196, 26, 32, 0.2);
-            border-top-color: #c41a20;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
+        /* ============================================
+           MOBILE ADAPTATIONS
+           ============================================ */
         @media (max-width: 768px) {
             .video-overlay {
                 background: linear-gradient(
@@ -363,978 +456,78 @@
                 padding-top: 100px;
                 padding-bottom: 60px;
             }
+            
+            .preloader-logo { 
+                height: 56px; 
+            }
+            .preloader-subtitle { 
+                font-size: 9px; 
+                letter-spacing: 0.3em; 
+            }
+            
+            .logo-container {
+                gap: 16px;
+            }
         }
 
         @media (max-width: 1024px) {
             .hero-grid { grid-template-columns: 1fr !important; }
             .hero-visual { display: none !important; }
         }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .premium-card:hover {
+                transform: none;
+            }
+            .premium-card:hover .card-image {
+                transform: none;
+            }
+            .premium-card:hover .card-overlay {
+                opacity: 1;
+            }
+            .btn-premium:hover {
+                transform: none;
+            }
+        }
+
+        /* Prevent horizontal scroll on mobile */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+
+        /* Improve tap targets */
+        a, button {
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        /* Fix iOS viewport height */
+        @supports (-webkit-touch-callout: none) {
+            .video-hero {
+                min-height: -webkit-fill-available;
+            }
+        }
     </style>
 </head>
 <body>
 
-   <!-- Preloader -->
-<div id="preloader" class="fixed inset-0 z-[100] bg-brand-black flex items-center justify-center overflow-hidden">
-    <div class="absolute inset-0">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-red/5 rounded-full blur-[120px] animate-pulse"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-brand-gold/3 rounded-full blur-[100px] animate-pulse" style="animation-delay: 0.5s"></div>
+   <!-- ============================================
+        PREMIUM PRELOADER
+        ============================================ -->
+<div id="preloader">
+    <div class="split-bg">
+        <div class="split-left"></div>
+        <div class="split-right"></div>
     </div>
-
-    <div class="relative z-10 text-center px-6">
-        <div class="mb-8 overflow-hidden">
-            <img src="assets/Лого.png" alt="Wilart" class="h-20 md:h-24 w-auto mx-auto object-contain animate-[fadeInUp_1s_ease-out]">
-        </div>
-
-        <div class="flex items-center justify-center gap-3 mb-8 animate-[fadeIn_1.2s_ease-out]">
-            <div class="w-16 h-[1px] bg-gradient-to-r from-transparent to-brand-red"></div>
-            <div class="w-2 h-2 bg-brand-red rotate-45"></div>
-            <div class="w-16 h-[1px] bg-gradient-to-l from-transparent to-brand-red"></div>
-        </div>
-
-        <div class="mb-6 animate-[fadeIn_1.4s_ease-out]">
-            <p class="text-brand-gray text-xs tracking-[0.4em] uppercase font-medium mb-3">Загрузка</p>
-            <div class="w-48 h-[1px] bg-brand-darker mx-auto overflow-hidden">
-                <div id="progress-bar" class="h-full bg-brand-red w-0 transition-all duration-[2000] ease-out"></div>
-            </div>
-        </div>
-
-        <div class="animate-[fadeIn_1.6s_ease-out]">
-            <span id="percentage" class="font-serif text-3xl text-white">0</span><span class="font-serif text-3xl text-brand-red">%</span>
-        </div>
+    <div class="logo-container">
+        <img src="assets/Лого.png" alt="Wilart" class="preloader-logo" id="preloaderLogo">
+        <span class="preloader-subtitle" id="preloaderSubtitle">Производственная компания</span>
     </div>
-
-    <div class="absolute top-8 left-8 w-12 h-12 border-l border-t border-brand-red/30 animate-[fadeIn_0.8s_ease-out]"></div>
-    <div class="absolute top-8 right-8 w-12 h-12 border-r border-t border-brand-red/30 animate-[fadeIn_0.8s_ease-out_delay_0.2s]"></div>
-    <div class="absolute bottom-8 left-8 w-12 h-12 border-l border-b border-brand-red/30 animate-[fadeIn_0.8s_ease-out_delay_0.4s]"></div>
-    <div class="absolute bottom-8 right-8 w-12 h-12 border-r border-b border-brand-red/30 animate-[fadeIn_0.8s_ease-out_delay_0.6s]"></div>
+    <div class="reveal-line"></div>
 </div>
-
-<style>
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-</style>
-
-<script>
-window.addEventListener('load', () => {
-    const preloader = document.getElementById('preloader');
-    const progressBar = document.getElementById('progress-bar');
-    const percentage = document.getElementById('percentage');
-    
-    setTimeout(() => {
-        progressBar.style.width = '100%';
-    }, 100);
-
-    let currentPercent = 0;
-    const interval = setInterval(() => {
-        if (currentPercent >= 100) {
-            clearInterval(interval);
-            setTimeout(() => {
-                preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 700);
-            }, 500);
-        } else {
-            currentPercent += 2;
-            percentage.textContent = currentPercent;
-        }
-    }, 40);
-});
-</script>
 
     <!-- Navigation -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
-        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
-            <div class="flex items-center justify-between py-6">
-                <a href="#" class="flex items-center group">
-                    <img src="assets/лого Corel DRAW 2-Photoroom.png" alt="Wilart - Мебель для гостиниц" class="h-10 md:h-12 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80">
-                </a>
-
-                <div class="hidden lg:flex items-center gap-10">
-                    <a href="#about" class="nav-link text-sm tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">О нас</a>
-                    <a href="#projects" class="nav-link text-sm tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Проекты</a>
-                    <a href="#process" class="nav-link text-sm tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Процесс</a>
-                    <a href="#clients" class="nav-link text-sm tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Клиенты</a>
-                    <a href="#contact" class="nav-link text-sm tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Контакты</a>
-                </div>
-
-                <div class="hidden lg:flex items-center gap-6">
-                    <a href="tel:+78001234567" class="text-sm text-brand-gray-light hover:text-white transition-colors tracking-wide">+7 (800) 123-45-67</a>
-                    <button onclick="scrollToContact()" class="btn-premium bg-brand-red text-white px-8 py-3 text-sm tracking-widest uppercase font-medium">
-                        Обсудить проект
-                    </button>
-                </div>
-
-                <button id="mobileMenuBtn" class="lg:hidden flex flex-col gap-1.5 p-2 group">
-                    <span class="w-6 h-[1px] bg-white transition-all duration-300 group-[.active]:rotate-45 group-[.active]:translate-y-[3.5px]"></span>
-                    <span class="w-6 h-[1px] bg-white transition-all duration-300 group-[.active]:opacity-0"></span>
-                    <span class="w-6 h-[1px] bg-white transition-all duration-300 group-[.active]:-rotate-45 group-[.active]:-translate-y-[3.5px]"></span>
-                </button>
-            </div>
-        </div>
-
-        <div id="mobileMenu" class="lg:hidden hidden bg-brand-black/98 backdrop-blur-xl border-t border-white/5">
-            <div class="px-6 py-8 space-y-6">
-                <a href="#about" class="block text-lg tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">О нас</a>
-                <a href="#projects" class="block text-lg tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Проекты</a>
-                <a href="#process" class="block text-lg tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Процесс</a>
-                <a href="#clients" class="block text-lg tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Клиенты</a>
-                <a href="#contact" class="block text-lg tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Контакты</a>
-                <div class="pt-6 border-t border-white/10 flex flex-col gap-4">
-                    <a href="tel:+78001234567" class="text-white tracking-wide">+7 (800) 123-45-67</a>
-                    <button onclick="scrollToContact()" class="btn-premium bg-brand-red text-white py-4 tracking-widest uppercase font-medium">
-                        Обсудить проект
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- VIDEO HERO SECTION -->
-<section class="video-hero">
-    <!-- Video Background -->
-    <div class="video-background">
-        <video 
-            id="heroVideo"
-            autoplay 
-            muted 
-            loop 
-            playsinline
-            preload="auto"
-        >
-            <source src="assets/wilart-showcase-hd.mp4" type="video/mp4">
-            <source src="assets/wilart-showcase.webm" type="video/webm">
-            Ваш браузер не поддерживает видео.
-        </video>
-    </div>
-
-    <!-- Overlay -->
-    <div class="video-overlay"></div>
-
-    <!-- Content -->
-    <div class="video-content max-w-[1440px] mx-auto px-6 lg:px-12 w-full">
-        <div class="max-w-3xl">
-            <div class="content-reveal inline-flex items-center gap-3 mb-8">
-                <div class="w-12 h-[1px] bg-brand-red"></div>
-                <span class="text-xs tracking-[0.4em] uppercase text-brand-red font-medium">С 2009 года</span>
-            </div>
-
-            <h1 class="content-reveal delay-1 font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] tracking-tight text-white mb-6">
-                Мебель для<br>
-                <span class="text-brand-red italic font-light">гостиниц</span><br>
-                и ресторанов
-            </h1>
-
-            <p class="content-reveal delay-2 text-lg sm:text-xl text-brand-gray-light leading-relaxed mb-10 max-w-2xl font-light">
-                Комплексное оснащение премиальных интерьеров. 
-                Собственное производство. От проектирования до монтажа.
-            </p>
-
-            <div class="content-reveal delay-3 flex flex-col sm:flex-row gap-4">
-                <button onclick="scrollToContact()" class="btn-premium bg-brand-red text-white px-10 py-5 tracking-widest uppercase text-sm font-medium">
-                    Получить расчет проекта
-                </button>
-                <a href="#projects" class="group flex items-center justify-center gap-3 px-8 py-5 border border-white/30 hover:border-white/60 transition-all duration-300 backdrop-blur-sm">
-                    <span class="text-sm tracking-widest uppercase">Наши проекты</span>
-                    <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </a>
-            </div>
-
-            <div class="content-reveal delay-3 grid grid-cols-3 gap-8 mt-16 pt-16 border-t border-white/10">
-                <div>
-                    <div class="font-serif text-4xl text-white mb-2">150+</div>
-                    <div class="text-xs tracking-widest uppercase text-brand-gray">Реализованных объектов</div>
-                </div>
-                <div>
-                    <div class="font-serif text-4xl text-white mb-2">15</div>
-                    <div class="text-xs tracking-widest uppercase text-brand-gray">Лет опыта</div>
-                </div>
-                <div>
-                    <div class="font-serif text-4xl text-white mb-2">100%</div>
-                    <div class="text-xs tracking-widest uppercase text-brand-gray">Соблюдение сроков</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-    <!-- Marquee Strip -->
-    <div class="bg-brand-red py-4 overflow-hidden">
-        <div class="marquee-track flex items-center gap-12 whitespace-nowrap">
-            <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Гостиницы</span>
-            <span class="text-white/40">✦</span>
-            <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Апарт-отели</span>
-            <span class="text-white/40">✦</span>
-            <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Рестораны</span>
-            <span class="text-white/40">✦</span>
-            <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Бутик-отели</span>
-            <span class="text-white/40"></span>
-            <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Коммерческие пространства</span>
-            <span class="text-white/40">✦</span>
-            <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Ресепшен</span>
-            <span class="text-white/40">✦</span>
-            <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Лобби</span>
-            <span class="text-white/40">✦</span>
-            <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Гостиницы</span>
-            <span class="text-white/40">✦</span>
-            <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Апарт-отели</span>
-            <span class="text-white/40">✦</span>
-            <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Рестораны</span>
-            <span class="text-white/40">✦</span>
-            <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Бутик-отели</span>
-            <span class="text-white/40"></span>
-            <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Коммерческие пространства</span>
-            <span class="text-white/40"></span>
-            <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Ресепшен</span>
-            <span class="text-white/40"></span>
-            <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Лобби</span>
-            <span class="text-white/40">✦</span>
-        </div>
-    </div>
-
-    <!-- About / Stats Section -->
-    <section id="about" class="bg-brand-black py-24 lg:py-32 relative">
-        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20">
-                <div class="lg:col-span-5 space-y-10">
-                    <div class="reveal">
-                        <div class="flex items-center gap-4 mb-6">
-                            <div class="w-12 h-[1px] bg-brand-red"></div>
-                            <span class="text-xs tracking-[0.4em] uppercase text-brand-red font-medium">О компании</span>
-                        </div>
-                        <h2 class="font-serif text-4xl sm:text-5xl leading-tight text-white">
-                            Создаём пространство,<br>
-                            <span class="italic text-brand-gray-light font-light">в которое хочется вернуться</span>
-                        </h2>
-                    </div>
-                    <div class="space-y-6 reveal reveal-delay-1">
-                        <p class="text-brand-gray leading-relaxed font-light">
-                            Wilart — производственная компания с 15-летним опытом создания премиальной мебели для гостиничного и ресторанного бизнеса. Мы не просто производим мебель — мы реализуем комплексные проекты оснащения коммерческих объектов.
-                        </p>
-                        <p class="text-brand-gray leading-relaxed font-light">
-                            Собственное производство в Москве, команда из 120+ специалистов и портфолио из 150+ реализованных объектов позволяют нам брать на себя полную ответственность за результат.
-                        </p>
-                    </div>
-                    <div class="reveal reveal-delay-2">
-                        <a href="#process" class="group inline-flex items-center gap-3 text-brand-red hover:text-white transition-colors duration-300">
-                            <span class="text-sm tracking-widest uppercase">Как мы работаем</span>
-                            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-7 grid grid-cols-2 gap-6">
-                    <div class="reveal reveal-delay-1 premium-card glass p-8 lg:p-10 group cursor-default">
-                        <div class="text-5xl lg:text-6xl font-serif text-white mb-3 counter" data-target="15">0</div>
-                        <div class="text-sm tracking-widest uppercase text-brand-gray mb-2">Лет опыта</div>
-                        <div class="w-8 h-[1px] bg-brand-red transition-all duration-500 group-hover:w-16"></div>
-                    </div>
-                    <div class="reveal reveal-delay-2 premium-card glass p-8 lg:p-10 group cursor-default">
-                        <div class="text-5xl lg:text-6xl font-serif text-white mb-3 counter" data-target="150">0</div>
-                        <div class="text-sm tracking-widest uppercase text-brand-gray mb-2">Объектов</div>
-                        <div class="w-8 h-[1px] bg-brand-red transition-all duration-500 group-hover:w-16"></div>
-                    </div>
-                    <div class="reveal reveal-delay-3 premium-card glass p-8 lg:p-10 group cursor-default">
-                        <div class="text-5xl lg:text-6xl font-serif text-white mb-3 counter" data-target="5000">0</div>
-                        <div class="text-sm tracking-widest uppercase text-brand-gray mb-2">м² производства</div>
-                        <div class="w-8 h-[1px] bg-brand-red transition-all duration-500 group-hover:w-16"></div>
-                    </div>
-                    <div class="reveal reveal-delay-4 premium-card glass p-8 lg:p-10 group cursor-default">
-                        <div class="text-5xl lg:text-6xl font-serif text-white mb-3 counter" data-target="120">0</div>
-                        <div class="text-sm tracking-widest uppercase text-brand-gray mb-2">Специалистов</div>
-                        <div class="w-8 h-[1px] bg-brand-red transition-all duration-500 group-hover:w-16"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-<section class="bg-brand-dark py-24 lg:py-32 relative">
-    <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
-        <div class="text-center mb-20 reveal">
-            <div class="flex items-center justify-center gap-4 mb-6">
-                <div class="w-12 h-[1px] bg-brand-red"></div>
-                <span class="text-xs tracking-[0.4em] uppercase text-brand-red font-medium">Направления</span>
-                <div class="w-12 h-[1px] bg-brand-red"></div>
-            </div>
-            <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-white">
-                Что мы <span class="italic text-brand-gray-light font-light">создаём</span>
-            </h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Service 1: Гостиницы -->
-            <div class="reveal reveal-delay-1 premium-card group cursor-pointer">
-                <div class="relative aspect-[3/4] overflow-hidden rounded-sm">
-                    <img 
-                        src="assets/hotel-rooms.jpg" 
-                        alt="Мебель для гостиничных номеров"
-                        class="card-image absolute inset-0 w-full h-full object-cover"
-                        loading="lazy"
-                    >
-                    <!-- Затемнение по умолчанию, чтобы текст читался -->
-                    <div class="absolute inset-0 bg-brand-black/40 transition-opacity duration-500 group-hover:opacity-0"></div>
-                    <!-- Оверлей с текстом при наведении -->
-                    <div class="card-overlay absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent opacity-0 flex items-end">
-                        <div class="p-8">
-                            <div class="text-white font-serif text-2xl mb-2">Гостиницы</div>
-                            <p class="text-brand-gray-light text-sm leading-relaxed mb-4">Оснащение номерного фонда, лобби и общественных зон. Полный цикл от проектирования до монтажа.</p>
-                            <div class="flex items-center gap-2 text-brand-red text-sm tracking-widest uppercase">
-                                <span>Подробнее</span>
-                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Подпись снизу (видна всегда) -->
-                    <div class="absolute bottom-6 left-6 right-6">
-                        <p class="text-white text-sm tracking-widest uppercase font-medium drop-shadow-lg">Гостиничные номера</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 2: Рестораны -->
-            <div class="reveal reveal-delay-2 premium-card group cursor-pointer">
-                <div class="relative aspect-[3/4] overflow-hidden rounded-sm">
-                    <img 
-                        src="assets/restaurants.jpg" 
-                        alt="Мебель для ресторанов и баров"
-                        class="card-image absolute inset-0 w-full h-full object-cover"
-                        loading="lazy"
-                    >
-                    <div class="absolute inset-0 bg-brand-black/40 transition-opacity duration-500 group-hover:opacity-0"></div>
-                    <div class="card-overlay absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent opacity-0 flex items-end">
-                        <div class="p-8">
-                            <div class="text-white font-serif text-2xl mb-2">Рестораны</div>
-                            <p class="text-brand-gray-light text-sm leading-relaxed mb-4">Индивидуальная мебель под концепцию заведения. Барные стойки, столы, мягкие зоны.</p>
-                            <div class="flex items-center gap-2 text-brand-red text-sm tracking-widest uppercase">
-                                <span>Подробнее</span>
-                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-6 left-6 right-6">
-                        <p class="text-white text-sm tracking-widest uppercase font-medium drop-shadow-lg">Рестораны и бары</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 3: Апарт-отели -->
-            <div class="reveal reveal-delay-3 premium-card group cursor-pointer">
-                <div class="relative aspect-[3/4] overflow-hidden rounded-sm">
-                    <img 
-                        src="assets/apart-hotels.jpg" 
-                        alt="Мебель для апарт-отелей"
-                        class="card-image absolute inset-0 w-full h-full object-cover"
-                        loading="lazy"
-                    >
-                    <div class="absolute inset-0 bg-brand-black/40 transition-opacity duration-500 group-hover:opacity-0"></div>
-                    <div class="card-overlay absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent opacity-0 flex items-end">
-                        <div class="p-8">
-                            <div class="text-white font-serif text-2xl mb-2">Апарт-отели</div>
-                            <p class="text-brand-gray-light text-sm leading-relaxed mb-4">Компактные решения с кухонными блоками. Мебель под интенсивную эксплуатацию.</p>
-                            <div class="flex items-center gap-2 text-brand-red text-sm tracking-widest uppercase">
-                                <span>Подробнее</span>
-                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-6 left-6 right-6">
-                        <p class="text-white text-sm tracking-widest uppercase font-medium drop-shadow-lg">Апарт-отели</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-    <!-- Projects / Cases Section -->
-    <section id="projects" class="bg-brand-black py-24 lg:py-32">
-        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
-            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-20 gap-6">
-                <div class="reveal">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-12 h-[1px] bg-brand-red"></div>
-                        <span class="text-xs tracking-[0.4em] uppercase text-brand-red font-medium">Портфолио</span>
-                    </div>
-                    <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-white">
-                        Реализованные<br>
-                        <span class="italic text-brand-gray-light font-light">проекты</span>
-                    </h2>
-                </div>
-                <div class="reveal reveal-delay-1">
-                    <p class="text-brand-gray max-w-md text-right lg:text-left font-light">
-                        Каждый проект — это уникальная история создания пространства. Мы показываем реальные объекты, а не рендеры.
-                    </p>
-                </div>
-            </div>
-
-           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-24 reveal">
-    <div class="relative aspect-[4/3] lg:aspect-square overflow-hidden rounded-sm group">
-        <!-- РЕАЛЬНОЕ ИЗОБРАЖЕНИЕ -->
-        <img 
-            src="assets/garden-street.jpg" 
-            alt="Оснащение отеля Garden Street"
-            class="card-image absolute inset-0 w-full h-full object-cover"
-            loading="lazy"
-        >
-        <div class="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-transparent"></div>
-        <div class="absolute bottom-8 left-8">
-            <div class="flex items-center gap-3 mb-2">
-                <span class="text-brand-red text-xs tracking-widest uppercase">Отель</span>
-                <div class="w-6 h-[1px] bg-brand-red"></div>
-                <span class="text-brand-gray text-xs">2024</span>
-            </div>
-            <h3 class="font-serif text-3xl text-white">Отель<br>«Garden street»</h3>
-        </div>
-    </div>
-    <div class="flex flex-col justify-center space-y-8">
-        <div class="space-y-6">
-            <p class="text-brand-gray leading-relaxed font-light text-lg">
-                Полный цикл оснащения 84 номеров отеля премиум-класса. Работа по дизайн-проекту с соблюдением всех авторских задумок.
-            </p>
-        </div>
-        <div class="grid grid-cols-2 gap-6">
-            <div class="border-l border-brand-red/30 pl-6">
-                <div class="font-serif text-3xl text-white mb-1">84</div>
-                <div class="text-xs tracking-widest uppercase text-brand-gray">номера</div>
-            </div>
-            <div class="border-l border-brand-red/30 pl-6">
-                <div class="font-serif text-3xl text-white mb-1">45</div>
-                <div class="text-xs tracking-widest uppercase text-brand-gray">дней срок</div>
-            </div>
-            <div class="border-l border-brand-red/30 pl-6">
-                <div class="font-serif text-3xl text-white mb-1">100%</div>
-                <div class="text-xs tracking-widest uppercase text-brand-gray">в срок</div>
-            </div>
-            <div class="border-l border-brand-red/30 pl-6">
-                <div class="font-serif text-3xl text-white mb-1">П+М</div>
-                <div class="text-xs tracking-widest uppercase text-brand-gray">производство + монтаж</div>
-            </div>
-        </div>
-        <div class="flex flex-wrap gap-2">
-            <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Кровати</span>
-            <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Шкафы</span>
-            <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Кухонные блоки</span>
-            <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Ресепшен</span>
-            <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Лобби</span>
-        </div>
-        <button onclick="scrollToContact()" class="btn-premium bg-brand-red text-white px-8 py-4 tracking-widest uppercase text-sm font-medium self-start">
-            Обсудить ваш проект
-        </button>
-    </div>
-</div>
-
-            <div class="section-divider mb-24"></div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 reveal">
-                <div class="order-2 lg:order-1 flex flex-col justify-center space-y-8">
-                    <div class="space-y-6">
-                        <p class="text-brand-gray leading-relaxed font-light text-lg">
-                            Комплексное оснащение отеля на 32 номера в историческом центре Санкт-Петербурга. Работа в три этапа поставки с координацией строительных работ.
-                        </p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="border-l border-brand-gold/30 pl-6">
-                            <div class="font-serif text-3xl text-white mb-1">32</div>
-                            <div class="text-xs tracking-widest uppercase text-brand-gray">номера</div>
-                        </div>
-                        <div class="border-l border-brand-gold/30 pl-6">
-                            <div class="font-serif text-3xl text-white mb-1">60</div>
-                            <div class="text-xs tracking-widest uppercase text-brand-gray">дней срок</div>
-                        </div>
-                        <div class="border-l border-brand-gold/30 pl-6">
-                            <div class="font-serif text-3xl text-white mb-1">3</div>
-                            <div class="text-xs tracking-widest uppercase text-brand-gray">этапа поставки</div>
-                        </div>
-                        <div class="border-l border-brand-gold/30 pl-6">
-                            <div class="font-serif text-3xl text-white mb-1">ПД</div>
-                            <div class="text-xs tracking-widest uppercase text-brand-gray">по дизайн-проекту</div>
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Мебель номеров</span>
-                        <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Ресторан</span>
-                        <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">Лобби-зона</span>
-                        <span class="px-4 py-2 bg-brand-darker text-brand-gray text-xs tracking-wider uppercase rounded-sm">SPA</span>
-                    </div>
-                    <button onclick="scrollToContact()" class="btn-premium bg-brand-red text-white px-8 py-4 tracking-widest uppercase text-sm font-medium self-start">
-                        Обсудить ваш проект
-                    </button>
-                </div>
-                <div class="relative aspect-[4/3] lg:aspect-square overflow-hidden rounded-sm group">
-                     <img 
-            src="assets/vvedensky.jpg" 
-            alt="Оснащение отеля Введенский в Санкт-Петербурге"
-            class="card-image absolute inset-0 w-full h-full object-cover"
-            loading="lazy"
-        >
-        <div class="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-transparent"></div>
-        <div class="absolute bottom-8 left-8">
-            <div class="flex items-center gap-3 mb-2">
-                <span class="text-brand-gold text-xs tracking-widest uppercase">Отель</span>
-                <div class="w-6 h-[1px] bg-brand-gold"></div>
-                <span class="text-brand-gray text-xs">2023</span>
-            </div>
-            <h3 class="font-serif text-3xl text-white">Отель<br>«Введенский»</h3>
-        </div>
-    </div>
-</div>
-
-    <!-- Process Section -->
-    <section id="process" class="bg-brand-dark py-24 lg:py-32 relative">
-        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
-            <div class="text-center mb-20 reveal">
-                <div class="flex items-center justify-center gap-4 mb-6">
-                    <div class="w-12 h-[1px] bg-brand-red"></div>
-                    <span class="text-xs tracking-[0.4em] uppercase text-brand-red font-medium">Процесс</span>
-                    <div class="w-12 h-[1px] bg-brand-red"></div>
-                </div>
-                <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-white">
-                    Как мы <span class="italic text-brand-gray-light font-light">работаем</span>
-                </h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5">
-                <div class="reveal reveal-delay-1 bg-brand-dark p-10 lg:p-12 group hover:bg-brand-darker transition-colors duration-500">
-                    <div class="text-6xl font-serif text-brand-red/20 mb-6">01</div>
-                    <h3 class="font-serif text-2xl text-white mb-4">Получаем проект</h3>
-                    <p class="text-brand-gray leading-relaxed font-light">Принимаем ТЗ, чертежи, дизайн-проекты или описываем задачу вместе с вами. Бесплатная консультация.</p>
-                </div>
-
-                <div class="reveal reveal-delay-2 bg-brand-dark p-10 lg:p-12 group hover:bg-brand-darker transition-colors duration-500">
-                    <div class="text-6xl font-serif text-brand-red/20 mb-6">02</div>
-                    <h3 class="font-serif text-2xl text-white mb-4">Расчёт и материалы</h3>
-                    <p class="text-brand-gray leading-relaxed font-light">Подбираем оптимальные материалы, рассчитываем стоимость и сроки. Предоставляем образцы.</p>
-                </div>
-
-                <div class="reveal reveal-delay-3 bg-brand-dark p-10 lg:p-12 group hover:bg-brand-darker transition-colors duration-500">
-                    <div class="text-6xl font-serif text-brand-red/20 mb-6">03</div>
-                    <h3 class="font-serif text-2xl text-white mb-4">Документация</h3>
-                    <p class="text-brand-gray leading-relaxed font-light">Создаём чертежи, согласовываем детали, утверждаем финальный вариант. Полная прозрачность.</p>
-                </div>
-
-                <div class="reveal reveal-delay-4 bg-brand-dark p-10 lg:p-12 group hover:bg-brand-darker transition-colors duration-500">
-                    <div class="text-6xl font-serif text-brand-red/20 mb-6">04</div>
-                    <h3 class="font-serif text-2xl text-white mb-4">Производство</h3>
-                    <p class="text-brand-gray leading-relaxed font-light">Изготовление на собственном производстве с контролем качества на каждом этапе.</p>
-                </div>
-
-                <div class="reveal reveal-delay-5 bg-brand-dark p-10 lg:p-12 group hover:bg-brand-darker transition-colors duration-500">
-                    <div class="text-6xl font-serif text-brand-red/20 mb-6">05</div>
-                    <h3 class="font-serif text-2xl text-white mb-4">Поставка</h3>
-                    <p class="text-brand-gray leading-relaxed font-light">Доставка по всей России. Организация логистики и разгрузки на объекте.</p>
-                </div>
-
-                <div class="reveal reveal-delay-6 bg-brand-dark p-10 lg:p-12 group hover:bg-brand-darker transition-colors duration-500 relative">
-                    <div class="absolute top-0 right-0 w-16 h-16 bg-brand-red/10 flex items-center justify-center">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c41a20" stroke-width="1.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </div>
-                    <div class="text-6xl font-serif text-brand-red/20 mb-6">06</div>
-                    <h3 class="font-serif text-2xl text-white mb-4">Монтаж</h3>
-                    <p class="text-brand-gray leading-relaxed font-light">Профессиональная сборка и установка на объекте. Сдача готового решения.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Clients Marquee -->
-    <section id="clients" class="bg-brand-black py-16 border-y border-white/5">
-        <div class="max-w-[1440px] mx-auto px-6 lg:px-12 mb-12">
-            <div class="flex items-center justify-center gap-4 reveal">
-                <div class="w-12 h-[1px] bg-brand-red"></div>
-                <span class="text-xs tracking-[0.4em] uppercase text-brand-red font-medium">Нам доверяют</span>
-                <div class="w-12 h-[1px] bg-brand-red"></div>
-            </div>
-        </div>
-        <div class="overflow-hidden">
-            <div class="marquee-track flex items-center gap-20 px-10">
-                <div class="flex items-center gap-3 text-white/30 text-xl font-serif tracking-widest whitespace-nowrap">GARDEN STREET</div>
-                <div class="flex items-center gap-3 text-white/30 text-xl font-serif tracking-widest whitespace-nowrap">FERMA</div>
-                <div class="flex items-center gap-3 text-white/30 text-xl font-serif tracking-widest whitespace-nowrap">RIVER PALACE HOTEL</div>
-                <div class="flex items-center gap-3 text-white/30 text-xl font-serif tracking-widest whitespace-nowrap">РЕСТОРАНЫ РАППОПОРТА</div>
-                <div class="flex items-center gap-3 text-white/30 text-xl font-serif tracking-widest whitespace-nowrap">ОТЕЛЬ ВВЕДЕНСКИЙ</div>
-                <div class="flex items-center gap-3 text-white/30 text-xl font-serif tracking-widest whitespace-nowrap">PUSHKA INN HOTEL</div>
-                <div class="flex items-center gap-3 text-white/30 text-xl font-serif tracking-widest whitespace-nowrap">AZIMUT</div>
-                <div class="flex items-center gap-3 text-white/30 text-xl font-serif tracking-widest whitespace-nowrap">HILTON</div>
-                <div class="flex items-center gap-3 text-white/30 text-xl font-serif tracking-widest whitespace-nowrap">MARRIOTT</div>
-                <div class="flex items-center gap-3 text-white/30 text-xl font-serif tracking-widest whitespace-nowrap">RADISSON</div>
-                <div class="flex items-center gap-3 text-white/30 text-xl font-serif tracking-widest whitespace-nowrap">NOVOTEL</div>
-                <div class="flex items-center gap-3 text-white/30 text-xl font-serif tracking-widest whitespace-nowrap">CITY VIEW</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="bg-brand-dark py-24 lg:py-32">
-        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
-            <div class="text-center mb-20 reveal">
-                <div class="flex items-center justify-center gap-4 mb-6">
-                    <div class="w-12 h-[1px] bg-brand-red"></div>
-                    <span class="text-xs tracking-[0.4em] uppercase text-brand-red font-medium">Отзывы</span>
-                    <div class="w-12 h-[1px] bg-brand-red"></div>
-                </div>
-                <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-white">
-                    Что говорят <span class="italic text-brand-gray-light font-light">клиенты</span>
-                </h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="reveal reveal-delay-1 glass p-10 premium-card">
-                    <div class="flex items-center gap-1 mb-6">
-                        <span class="text-brand-gold text-lg">★★★★★</span>
-                    </div>
-                    <blockquote class="text-brand-gray-light leading-relaxed font-light mb-8 italic">
-                        «Компания Wilart выполнила оснащение 120 номеров в установленные сроки. Качество мебели и уровень сервиса превзошли наши ожидания.»
-                    </blockquote>
-                    <div class="flex items-center gap-4 pt-6 border-t border-white/10">
-                        <div class="w-12 h-12 rounded-full bg-brand-darker flex items-center justify-center text-brand-gold font-serif text-lg">ИП</div>
-                        <div>
-                            <div class="text-white font-medium text-sm">Иван Петров</div>
-                            <div class="text-brand-gray text-xs">Управляющий, Отель «Азимут»</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="reveal reveal-delay-2 glass p-10 premium-card">
-                    <div class="flex items-center gap-1 mb-6">
-                        <span class="text-brand-gold text-lg">★★★★★</span>
-                    </div>
-                    <blockquote class="text-brand-gray-light leading-relaxed font-light mb-8 italic">
-                        «Работали с Wilart по дизайн-проекту. Точное соответствие чертежам, соблюдение сроков. Мебель выдерживает высокую нагрузку.»
-                    </blockquote>
-                    <div class="flex items-center gap-4 pt-6 border-t border-white/10">
-                        <div class="w-12 h-12 rounded-full bg-brand-darker flex items-center justify-center text-brand-gold font-serif text-lg">АК</div>
-                        <div>
-                            <div class="text-white font-medium text-sm">Анна Козлова</div>
-                            <div class="text-brand-gray text-xs">Архитектор, Апарт-отель «СитиВью»</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="reveal reveal-delay-3 glass p-10 premium-card">
-                    <div class="flex items-center gap-1 mb-6">
-                        <span class="text-brand-gold text-lg">★★★★★</span>
-                    </div>
-                    <blockquote class="text-brand-gray-light leading-relaxed font-light mb-8 italic">
-                        «Заказывали мебель для ресторана на 200 посадочных мест. Индивидуальный подход, нестандартные решения, точные сроки.»
-                    </blockquote>
-                    <div class="flex items-center gap-4 pt-6 border-t border-white/10">
-                        <div class="w-12 h-12 rounded-full bg-brand-darker flex items-center justify-center text-brand-gold font-serif text-lg">ДС</div>
-                        <div>
-                            <div class="text-white font-medium text-sm">Дмитрий Смирнов</div>
-                            <div class="text-brand-gray text-xs">Владелец, Ресторан «Волна»</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Final CTA Section -->
-    <section id="contact" class="bg-brand-black py-24 lg:py-32 relative overflow-hidden">
-        <div class="absolute inset-0">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-red/5 rounded-full blur-[200px]"></div>
-        </div>
-        
-        <div class="relative max-w-[1440px] mx-auto px-6 lg:px-12">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-                <div class="space-y-10 reveal">
-                    <div>
-                        <div class="flex items-center gap-4 mb-6">
-                            <div class="w-12 h-[1px] bg-brand-red"></div>
-                            <span class="text-xs tracking-[0.4em] uppercase text-brand-red font-medium">Начать проект</span>
-                        </div>
-                        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-white leading-tight">
-                            Давайте создадим<br>
-                            <span class="italic text-brand-gray-light font-light">ваш проект</span>
-                        </h2>
-                    </div>
-                    <p class="text-brand-gray text-lg leading-relaxed font-light max-w-lg">
-                        Расскажите о вашем объекте — мы подготовим предварительное коммерческое предложение и поможем подобрать оптимальное решение.
-                    </p>
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center flex-shrink-0">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c41a20" stroke-width="1.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-                            </div>
-                            <a href="tel:+78001234567" class="text-white hover:text-brand-red transition-colors text-lg">+7 (800) 123-45-67</a>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center flex-shrink-0">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c41a20" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                            </div>
-                            <a href="mailto:info@wilart.ru" class="text-white hover:text-brand-red transition-colors text-lg">info@wilart.ru</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="reveal reveal-delay-2">
-                    <form class="glass p-10 lg:p-12 space-y-6" onsubmit="handleSubmit(event)">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div class="space-y-2">
-                                <label class="text-xs tracking-widest uppercase text-brand-gray">Имя</label>
-                                <input type="text" placeholder="Ваше имя" class="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder-brand-gray/50 focus:border-brand-red focus:outline-none transition-colors" required>
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-xs tracking-widest uppercase text-brand-gray">Телефон</label>
-                                <input type="tel" placeholder="+7 (___) ___-__-__" class="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder-brand-gray/50 focus:border-brand-red focus:outline-none transition-colors" required>
-                            </div>
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-xs tracking-widest uppercase text-brand-gray">Email</label>
-                            <input type="email" placeholder="your@email.com" class="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder-brand-gray/50 focus:border-brand-red focus:outline-none transition-colors">
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-xs tracking-widest uppercase text-brand-gray">Описание проекта</label>
-                            <textarea placeholder="Расскажите о вашем объекте: тип, количество номеров, сроки..." rows="4" class="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder-brand-gray/50 focus:border-brand-red focus:outline-none transition-colors resize-none"></textarea>
-                        </div>
-                        <div class="flex items-center gap-4 pt-4">
-                            <label class="flex items-center gap-3 cursor-pointer group">
-                                <div class="w-10 h-10 border border-white/20 group-hover:border-brand-red flex items-center justify-center transition-colors">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" class="group-hover:stroke-brand-red transition-colors"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-                                </div>
-                                <span class="text-sm text-brand-gray group-hover:text-white transition-colors">Прикрепить проект</span>
-                                <input type="file" class="hidden" accept=".pdf,.dwg,.jpg,.png">
-                            </label>
-                        </div>
-                        <button type="submit" class="btn-premium w-full bg-brand-red text-white py-5 tracking-widest uppercase text-sm font-medium mt-4">
-                            Отправить запрос
-                        </button>
-                        <p class="text-center text-brand-gray text-xs">Ответим в течение 2 часов в рабочее время</p>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-brand-dark border-t border-white/5 py-16">
-        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-                <div class="lg:col-span-2">
-                    <a href="#" class="inline-flex items-center gap-3 mb-6">
-                        <div class="w-10 h-10 bg-brand-red flex items-center justify-center">
-                            <span class="text-white font-serif text-xl font-bold">W</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <span class="font-serif text-xl tracking-wider text-white">WILART</span>
-                            <span class="text-[9px] tracking-[0.3em] text-brand-gray uppercase">Производственная компания</span>
-                        </div>
-                    </a>
-                    <p class="text-brand-gray leading-relaxed font-light max-w-md">
-                        Премиальное производство мебели для гостиниц, апарт-отелей, ресторанов и коммерческих пространств. Собственное производство полного цикла в Москве.
-                    </p>
-                </div>
-
-                <div>
-                    <h4 class="text-white text-sm tracking-widest uppercase mb-6">Навигация</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#about" class="text-brand-gray hover:text-white transition-colors text-sm font-light">О компании</a></li>
-                        <li><a href="#projects" class="text-brand-gray hover:text-white transition-colors text-sm font-light">Проекты</a></li>
-                        <li><a href="#process" class="text-brand-gray hover:text-white transition-colors text-sm font-light">Процесс</a></li>
-                        <li><a href="#clients" class="text-brand-gray hover:text-white transition-colors text-sm font-light">Клиенты</a></li>
-                        <li><a href="#contact" class="text-brand-gray hover:text-white transition-colors text-sm font-light">Контакты</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-white text-sm tracking-widest uppercase mb-6">Контакты</h4>
-                    <ul class="space-y-3">
-                        <li><a href="tel:+78001234567" class="text-brand-gray hover:text-white transition-colors text-sm font-light">+7 (800) 123-45-67</a></li>
-                        <li><a href="mailto:info@wilart.ru" class="text-brand-gray hover:text-white transition-colors text-sm font-light">info@wilart.ru</a></li>
-                        <li class="text-brand-gray text-sm font-light">Москва, ул. Производственная, 15</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="section-divider mb-8"></div>
-
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-brand-gray text-xs">© 2025 Wilart. Все права защищены.</p>
-                <div class="flex items-center gap-6">
-                    <a href="#" class="text-brand-gray hover:text-white transition-colors text-xs">Политика конфиденциальности</a>
-                    <a href="#" class="text-brand-gray hover:text-white transition-colors text-xs">Карта сайта</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Mobile Sticky CTA -->
-    <div id="stickyCta" class="sticky-cta fixed bottom-0 left-0 w-full bg-brand-black/95 backdrop-blur-xl border-t border-white/10 p-4 z-50 lg:hidden">
-        <div class="flex gap-3">
-            <a href="tel:+78001234567" class="flex-1 bg-brand-darker flex items-center justify-center gap-2 py-4 text-sm font-medium text-white">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-                Позвонить
-            </a>
-            <button onclick="scrollToContact()" class="flex-1 btn-premium bg-brand-red flex items-center justify-center gap-2 py-4 text-sm font-medium text-white">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                Написать
-            </button>
-        </div>
-    </div>
-
-    <script>
-        // Scroll reveal
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        // Counter animation
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    const target = parseInt(el.dataset.target);
-                    if (!target) return;
-                    let current = 0;
-                    const increment = target / 80;
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= target) {
-                            current = target;
-                            clearInterval(timer);
-                        }
-                        el.textContent = Math.floor(current).toLocaleString('ru-RU');
-                    }, 20);
-                    counterObserver.unobserve(el);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
-
-        // Video Loading & Performance
-        const video = document.getElementById('heroVideo');
-        const videoLoader = document.getElementById('videoLoader');
-
-        if (video) {
-            video.addEventListener('loadeddata', () => {
-                setTimeout(() => {
-                    videoLoader.classList.add('hidden');
-                }, 500);
-            });
-
-            video.addEventListener('error', () => {
-                videoLoader.innerHTML = '<p class="text-brand-gray text-sm">Видео загружается...</p>';
-                setTimeout(() => videoLoader.classList.add('hidden'), 1000);
-            });
-
-            // Pause video when not visible
-            const videoObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        video.play();
-                    } else {
-                        video.pause();
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            videoObserver.observe(video);
-        }
-
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        let lastScroll = 0;
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            if (scrollY > 100) {
-                navbar.classList.add('bg-brand-black/95', 'backdrop-blur-xl', 'shadow-lg', 'shadow-black/20');
-                navbar.querySelector('.flex').classList.remove('py-6');
-                navbar.querySelector('.flex').classList.add('py-4');
-            } else {
-                navbar.classList.remove('bg-brand-black/95', 'backdrop-blur-xl', 'shadow-lg', 'shadow-black/20');
-                navbar.querySelector('.flex').classList.add('py-6');
-                navbar.querySelector('.flex').classList.remove('py-4');
-            }
-            lastScroll = scrollY;
-        });
-
-        // Mobile menu
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            mobileMenuBtn.classList.toggle('active');
-        });
-        mobileMenu.querySelectorAll('a').forEach(a => {
-            a.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenuBtn.classList.remove('active');
-            });
-        });
-
-        // Sticky CTA visibility
-        const stickyCta = document.getElementById('stickyCta');
-        const heroSection = document.querySelector('.video-hero');
-        const stickyObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    stickyCta.classList.add('visible');
-                } else {
-                    stickyCta.classList.remove('visible');
-                }
-            });
-        }, { threshold: 0.3 });
-        stickyObserver.observe(heroSection);
-
-        // Smooth scroll to contact
-        function scrollToContact() {
-            const contactSection = document.getElementById('contact');
-            if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
-
-        // Form submission
-        function handleSubmit(event) {
-            event.preventDefault();
-            const form = event.target;
-            const button = form.querySelector('button[type="submit"]');
-            const originalText = button.textContent;
-            
-            button.textContent = 'Отправлено ✓';
-            button.classList.add('bg-green-600');
-            
-            setTimeout(() => {
-                button.textContent = originalText;
-                button.classList.remove('bg-green-600');
-                form.reset();
-            }, 3000);
-        }
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-    </script>
-</body>
-</html>
-
+    <nav id="mainNav" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
+        <div class="max-w-[1440px] mx-auto pxmax-w-[1440px] mx-auto px
