@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wilart — Мебель для гостиниц и HoReCa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#0a0a0a',
+                            dark: '#111111',
+                            darker: '#1a1a1a',
+                            red: '#c41a20',
+                            'red-accent': '#e31e25',
+                            gold: '#b8956a',
+                            white: '#ffffff',
+                            gray: '#888888',
+                            'gray-light': '#cccccc',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+
+        /* Video Container */
+        .video-hero {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.05);
+            will-change: transform;
+        }
+
+        /* Gradient Overlay - оптимизирован для читаемости */
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg, 
+                rgba(10, 10, 10, 0.85) 0%, 
+                rgba(10, 10, 10, 0.6) 50%, 
+                rgba(10, 10, 10, 0.75) 100%
+            );
+            z-index: 1;
+        }
+
+        /* Дополнительное затемнение снизу */
+        .video-overlay::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent);
+        }
+
+        /* Content Container */
+        .video-content {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 80px; /* Для навбара */
+        }
+
+        /* Анимация появления контента */
+        .content-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: contentReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .content-reveal.delay-1 { animation-delay: 0.3s; }
+        .content-reveal.delay-2 { animation-delay: 0.5s; }
+        .content-reveal.delay-3 { animation-delay: 0.7s; }
+
+        @keyframes contentReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Видео лоадер */
+        .video-loader {
+            position: absolute;
+            inset: 0;
+            z-index: 20;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+
+        .video-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Параллакс эффект для видео */
+        @media (min-width: 1024px) {
+            .video-background video {
+                will-change: transform;
+            }
+        }
+
+        /* Мобильная адаптация */
+        @media (max-width: 768px) {
+            .video-overlay {
+                background: linear-gradient(
+                    135deg, 
+                    rgba(10, 10, 10, 0.9) 0%, 
+                    rgba(10, 10, 10, 0.75) 100%
+                );
+            }
+            
+            .video-content {
+                padding-top: 100px;
+                padding-bottom: 60px;
+            }
+        }
+
+        /* Кнопка play/pause (опционально) */
+        .video-controls {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .video-hero:hover .video-controls {
+            opacity: 1;
+        }
+
+        /* Индикатор загрузки */
+        .loader-spinner {
+            width: 48px;
+            height: 48px;
+            border: 2px solid rgba(196, 26, 32, 0.2);
+            border-top-color: #c41a20;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-brand-black/80 backdrop-blur-xl border-b border-white/5 transition-all duration-300" id="navbar">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+            <div class="flex items-center justify-between py-5">
+                <a href="#" class="flex items-center group">
+                    <img src="assets/logo.png" alt="Wilart" class="h-10 md:h-12 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80">
+                </a>
+                <div class="hidden lg:flex items-center gap-10">
+                    <a href="#advantages" class="text-sm tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Преимущества</a>
+                    <a href="#projects" class="text-sm tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Проекты</a>
+                    <a href="#contact" class="text-sm tracking-widest uppercase text-brand-gray-light hover:text-white transition-colors">Контакты</a>
+                </div>
+                <button onclick="scrollToContact()" class="bg-brand-red text-white px-8 py-3 text-sm tracking-widest uppercase font-medium hover:bg-brand-red-accent transition-colors">
+                    Получить расчет
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- VIDEO HERO SECTION -->
+    <section class="video-hero">
+        <!-- Video Background -->
+        <div class="video-background">
+            <video 
+                id="heroVideo"
+                autoplay 
+                muted 
+                loop 
+                playsinline
+                poster="assets/video-poster.jpg"
+                preload="metadata"
+            >
+                <!-- Оптимизированные версии видео -->
+                <source src="assets/wilart-showcase-hd.mp4" type="video/mp4" media="(min-width: 1024px)">
+                <source src="assets/wilart-showcase-mobile.mp4" type="video/mp4" media="(max-width: 1023px)">
+                <source src="assets/wilart-showcase.webm" type="video/webm">
+                <!-- Fallback -->
+                <img src="assets/hero-fallback.jpg" alt="Интерьеры от Wilart" class="w-full h-full object-cover">
+            </video>
+        </div>
+
+        <!-- Overlay для читаемости -->
+        <div class="video-overlay"></div>
+
+        <!-- Loader -->
+        <div class="video-loader" id="videoLoader">
+            <div class="text-center">
+                <div class="loader-spinner mx-auto mb-4"></div>
+                <p class="text-brand-gray text-xs tracking-[0.3em] uppercase">Загрузка видео</p>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="video-content max-w-[1440px] mx-auto px-6 lg:px-12 w-full">
+            <div class="max-w-3xl">
+                <!-- Badge -->
+                <div class="content-reveal inline-flex items-center gap-3 mb-8">
+                    <div class="w-12 h-[1px] bg-brand-red"></div>
+                    <span class="text-xs tracking-[0.4em] uppercase text-brand-red font-medium">С 2009 года</span>
+                </div>
+
+                <!-- Headline -->
+                <h1 class="content-reveal delay-1 font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] tracking-tight text-white mb-6">
+                    Мебель для<br>
+                    <span class="text-brand-red italic font-light">гостиниц</span><br>
+                    и ресторанов
+                </h1>
+
+                <!-- Description -->
+                <p class="content-reveal delay-2 text-lg sm:text-xl text-brand-gray-light leading-relaxed mb-10 max-w-2xl font-light">
+                    Комплексное оснащение премиальных интерьеров. 
+                    Собственное производство. От проектирования до монтажа.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="content-reveal delay-3 flex flex-col sm:flex-row gap-4">
+                    <button onclick="scrollToContact()" class="group relative bg-brand-red text-white px-10 py-5 tracking-widest uppercase text-sm font-medium overflow-hidden transition-all hover:bg-brand-red-accent">
+                        <span class="relative z-10">Получить расчет проекта</span>
+                        <div class="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 opacity-20"></div>
+                    </button>
+                    <a href="#projects" class="group flex items-center justify-center gap-3 px-8 py-5 border border-white/30 hover:border-white/60 transition-all duration-300 backdrop-blur-sm">
+                        <span class="text-sm tracking-widest uppercase">Наши проекты</span>
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Stats -->
+                <div class="content-reveal delay-3 grid grid-cols-3 gap-8 mt-16 pt-16 border-t border-white/10">
+                    <div>
+                        <div class="font-serif text-4xl text-white mb-2">150+</div>
+                        <div class="text-xs tracking-widest uppercase text-brand-gray">Реализованных объектов</div>
+                    </div>
+                    <div>
+                        <div class="font-serif text-4xl text-white mb-2">15</div>
+                        <div class="text-xs tracking-widest uppercase text-brand-gray">Лет опыта</div>
+                    </div>
+                    <div>
+                        <div class="font-serif text-4xl text-white mb-2">100%</div>
+                        <div class="text-xs tracking-widest uppercase text-brand-gray">Соблюдение сроков</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional Video Controls -->
+        <div class="video-controls">
+            <button id="videoToggle" class="w-12 h-12 rounded-full bg-brand-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-brand-red transition-colors" aria-label="Pause video">
+                <svg id="pauseIcon" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <rect x="6" y="4" width="4" height="16"/>
+                    <rect x="14" y="4" width="4" height="16"/>
+                </svg>
+                <svg id="playIcon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- Rest of your page content... -->
+    <section id="advantages" class="bg-brand-black py-24 lg:py-32">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+            <h2 class="font-serif text-4xl text-white mb-12">Почему выбирают Wilart</h2>
+            <!-- Your advantages content here -->
+        </div>
+    </section>
+
+    <script>
+        // Video Loading & Performance
+        const video = document.getElementById('heroVideo');
+        const loader = document.getElementById('videoLoader');
+        const videoToggle = document.getElementById('videoToggle');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const playIcon = document.getElementById('playIcon');
+        let isPlaying = true;
+
+        // Show loader until video is ready
+        video.addEventListener('loadeddata', () => {
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 500);
+        });
+
+        video.addEventListener('error', () => {
+            loader.innerHTML = '<p class="text-brand-gray text-sm">Видео загружается...</p>';
+            setTimeout(() => loader.classList.add('hidden'), 1000);
+        });
+
+        // Play/Pause Toggle
+        videoToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                video.pause();
+                pauseIcon.classList.add('hidden');
+                playIcon.classList.remove('hidden');
+            } else {
+                video.play();
+                pauseIcon.classList.remove('hidden');
+                playIcon.classList.add('hidden');
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Pause video when not visible (Performance)
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (isPlaying) video.play();
+                } else {
+                    video.pause();
+                }
+            });
+        }, { threshold: 0.1 });
+
+        videoObserver.observe(video);
+
+        // Parallax effect on scroll (Desktop only)
+        if (window.innerWidth >= 1024) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const videoContainer = document.querySelector('.video-background');
+                if (videoContainer && scrolled < window.innerHeight) {
+                    videoContainer.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+        }
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-brand-black/95', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-brand-black/95', 'shadow-lg');
+            }
+        });
+
+        function scrollToContact() {
+            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
