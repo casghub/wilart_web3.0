@@ -51,7 +51,11 @@
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #555; }
 
-        //
+        /* ============================================
+           PREMIUM PRELOADER — v3 FINAL
+           СЛЕВА БЕЛЫЙ (52.35%) | СПРАВА ЧЁРНЫЙ (47.65%)
+           Линия разделения совпадает с линией логотипа (445px из 850px)
+           ============================================ */
         #preloader {
             position: fixed;
             inset: 0;
@@ -72,9 +76,9 @@
             z-index: 1;
         }
 
-        /* СЛЕВА — БЕЛЫЙ С ТЕКСТУРОЙ МАТЕРИАЛА */
+        /* СЛЕВА — БЕЛЫЙ (52.35% = 445px из 850px ширины логотипа) */
         .split-left {
-            width: 52.35%%;
+            width: 52.35%;
             height: 100%;
             background: #ffffff;
             background-image: 
@@ -83,9 +87,9 @@
             transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        /* СПРАВА — ЧЁРНЫЙ С ТЕКСТУРОЙ МАТЕРИАЛА */
+        /* СПРАВА — ЧЁРНЫЙ (47.65%) */
         .split-right {
-            width: 47.65%%;
+            width: 47.65%;
             height: 100%;
             background: #111111;
             background-image: 
@@ -140,18 +144,14 @@
             max-width: 75vw;
             object-fit: contain;
             opacity: 0;
-            
-            /* ТОЧНЫЙ СДВИГ: ширина 850px, линия на 445px, центр 425px → сдвиг -20px */
-            --logo-nudge: -20px;
-            
-            transform: translateY(20px) translateX(var(--logo-nudge));
+            transform: translateY(20px);
             transition: opacity 1s ease, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             z-index: 11;
         }
         .preloader-logo.visible {
             opacity: 1;
-            transform: translateY(0) translateX(var(--logo-nudge));
+            transform: translateY(0);
         }
 
         .preloader-subtitle {
@@ -235,7 +235,7 @@
         }
 
         /* ============================================
-           ОСТАВШИЕСЯ АНИМАЦИИ (только используемые)
+           ТОЛЬКО ИСПОЛЬЗУЕМЫЕ АНИМАЦИИ
            ============================================ */
         @keyframes shimmer {
             0% { background-position: -200% 0; }
@@ -424,10 +424,7 @@
         /* ============================================
            MOBILE ADAPTATIONS
            ============================================ */
-        @media (max-width: 768px) {{
-    .split-left { width: 52.35%; }
-    .split-right { width: 47.65%; }
-}
+        @media (max-width: 768px) {
             .video-overlay {
                 background: linear-gradient(135deg, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.75) 100%);
             }
@@ -436,7 +433,6 @@
                 padding-bottom: 60px;
             }
 
-            /* Логотип на мобильных */
             .preloader-logo { 
                 height: 140px; 
                 max-width: 85vw;
@@ -480,8 +476,8 @@
 <body>
 
    <!-- ============================================
-        PREMIUM PRELOADER — v3
-        СЛЕВА БЕЛЫЙ | СПРАВА ЧЁРНЫЙ
+        PREMIUM PRELOADER — v3 FINAL
+        СЛЕВА БЕЛЫЙ (52.35%) | СПРАВА ЧЁРНЫЙ (47.65%)
         ============================================ -->
 <div id="preloader">
     <div class="split-bg">
@@ -1292,7 +1288,7 @@
 
     <script>
         // ============================================
-        // PREMIUM PRELOADER ANIMATION — v3
+        // PREMIUM PRELOADER ANIMATION — v3 FINAL
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             const preloader = document.getElementById('preloader');
@@ -1486,4 +1482,3 @@
     </script>
 </body>
 </html>
-
