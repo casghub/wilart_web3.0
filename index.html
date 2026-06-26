@@ -537,6 +537,7 @@
             preload="auto"
             webkit-playsinline
             x-webkit-airplay="allow"
+            style="object-fit: cover; width: 100%; height: 100%;"
         >
             <source src="assets/wilart-showcase-hd.mp4" type="video/mp4">
             <source src="assets/wilart-showcase.webm" type="video/webm">
@@ -596,7 +597,7 @@
     <div class="bg-brand-red py-4 overflow-hidden">
         <div class="marquee-track flex items-center gap-12 whitespace-nowrap">
             <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Гостиницы</span>
-            <span class="text-white/40">✦</span>
+            <span class="text-white/40"></span>
             <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Апарт-отели</span>
             <span class="text-white/40">✦</span>
             <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Рестораны</span>
@@ -604,13 +605,13 @@
             <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Бутик-отели</span>
             <span class="text-white/40"></span>
             <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Коммерческие пространства</span>
-            <span class="text-white/40">✦</span>
+            <span class="text-white/40"></span>
             <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Ресепшен</span>
-            <span class="text-white/40">✦</span>
+            <span class="text-white/40"></span>
             <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Лобби</span>
             <span class="text-white/40">✦</span>
             <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Гостиницы</span>
-            <span class="text-white/40">✦</span>
+            <span class="text-white/40"></span>
             <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Апарт-отели</span>
             <span class="text-white/40">✦</span>
             <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Рестораны</span>
@@ -693,6 +694,7 @@
                 preload="auto"
                 webkit-playsinline
                 x-webkit-airplay="allow"
+                style="object-fit: cover; width: 100%; height: 100%;"
             >
                 <source src="assets/production.mp4" type="video/mp4">
                 <source src="assets/production.webm" type="video/webm">
@@ -1298,6 +1300,12 @@
                 preloader.style.display = 'none';
                 heroSection.classList.add('visible');
                 navbar.classList.add('visible');
+                
+                // Запуск видео сразу после прелоадера
+                const heroVideo = document.getElementById('heroVideo');
+                if (heroVideo) {
+                    heroVideo.play().catch(() => {});
+                }
             }, 3900);
 
             setTimeout(() => {
@@ -1338,15 +1346,22 @@
 
         document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
+        // Hero Video - автовоспроизведение на всех устройствах
         const heroVideo = document.getElementById('heroVideo');
         if (heroVideo) {
             const playVideo = () => {
                 heroVideo.play().catch(() => {});
             };
             
+            // Запуск при загрузке
             window.addEventListener('load', playVideo);
-            document.addEventListener('touchstart', playVideo, { once: true });
             
+            // Запуск при первом взаимодействии (для мобильных)
+            document.addEventListener('click', playVideo, { once: true });
+            document.addEventListener('touchstart', playVideo, { once: true });
+            document.addEventListener('scroll', playVideo, { once: true });
+            
+            // Пауза когда не видно
             const heroVideoObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1360,6 +1375,7 @@
             heroVideoObserver.observe(heroVideo);
         }
 
+        // Production Video - автовоспроизведение на всех устройствах
         const productionVideo = document.getElementById('productionVideo');
         if (productionVideo) {
             const playProductionVideo = () => {
@@ -1367,7 +1383,9 @@
             };
             
             window.addEventListener('load', playProductionVideo);
+            document.addEventListener('click', playProductionVideo, { once: true });
             document.addEventListener('touchstart', playProductionVideo, { once: true });
+            document.addEventListener('scroll', playProductionVideo, { once: true });
             
             const productionVideoObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
