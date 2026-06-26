@@ -1,33 +1,4 @@
-
-                        <!DOCTYPE html>
-                        <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <style>
-                body {
-                  background-color: white; /* Ensure the iframe has a white background */
-                }
-
-                /* НАСТРОЙКИ ДЛЯ ДЕСКТОПА */
-:root {
-    --split-left: 50.5%;
-    --split-right: 49.5%;
-}
-
-@media (max-width: 768px) {
-    /* НАСТРОЙКИ ДЛЯ МОБИЛЬНЫХ */
-    :root {
-        --split-left: 50.5%;
-        --split-right: 49.5%;
-    }
-}
-
-
-              </style>
-                        </head>
-                        <body>
-                            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -80,15 +51,10 @@
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #555; }
 
-        /* ============================================
-           PREMIUM PRELOADER — FINAL
-           ОТДЕЛЬНЫЕ НАСТРОЙКИ ДЛЯ ДЕСКТОПА И МОБИЛЬНЫХ
-           ============================================ */
-        
-        /* НАСТРОЙКИ ДЛЯ ДЕСКТОПА */
         :root {
             --split-left: 50.5%;
             --split-right: 49.5%;
+            --brand-black: #221f20;
         }
 
         #preloader {
@@ -111,7 +77,6 @@
             z-index: 1;
         }
 
-        /* СЛЕВА — БЕЛЫЙ */
         .split-left {
             width: var(--split-left);
             height: 100%;
@@ -122,11 +87,10 @@
             transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        /* СПРАВА — ЧЁРНЫЙ */
         .split-right {
             width: var(--split-right);
             height: 100%;
-            background: #111111;
+            background: var(--brand-black);
             background-image: 
                 linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 50%),
                 radial-gradient(circle at 70% 50%, rgba(196, 26, 32, 0.03) 0%, transparent 60%);
@@ -153,7 +117,6 @@
             gap: 28px;
         }
 
-        /* Красное свечение под логотипом (глубина как у Apple/Aesop) */
         .logo-glow {
             position: absolute;
             top: 50%;
@@ -172,7 +135,6 @@
             opacity: 1;
         }
 
-        /* ЛОГОТИП — воздух = премиальность */
         .preloader-logo {
             height: 220px;
             width: auto;
@@ -208,7 +170,6 @@
             transform: translateY(0);
         }
 
-        /* ЛАЗЕРНАЯ ЛИНИЯ РАСКРОЕЧНОГО СТАНКА */
         .reveal-line {
             position: absolute;
             top: 50%;
@@ -235,7 +196,6 @@
             width: 100%;
         }
 
-        /* Hero fade-in */
         .hero-section {
             opacity: 0;
             transform: translateY(20px);
@@ -246,7 +206,6 @@
             transform: translateY(0);
         }
 
-        /* ВАУ-ЭФФЕКТ: контент hero появляется последовательно */
         .hero-section .content-reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -269,9 +228,6 @@
             opacity: 1;
         }
 
-        /* ============================================
-           ТОЛЬКО ИСПОЛЬЗУЕМЫЕ АНИМАЦИИ
-           ============================================ */
         @keyframes shimmer {
             0% { background-position: -200% 0; }
             100% { background-position: 200% 0; }
@@ -386,7 +342,6 @@
 
         .marquee-track { animation: marquee 30s linear infinite; }
 
-        /* Video Hero */
         .video-hero {
             position: relative;
             min-height: 100vh;
@@ -424,7 +379,6 @@
             padding-top: 80px;
         }
 
-        /* Production Video */
         .production-video-section {
             position: relative;
             height: 600px;
@@ -456,14 +410,10 @@
             padding: 0 24px;
         }
 
-        /* ============================================
-           MOBILE ADAPTATIONS
-           ============================================ */
         @media (max-width: 768px) {
-            /* НАСТРОЙКИ ДЛЯ МОБИЛЬНЫХ */
             :root {
-                --split-left: 50.5%;
-                --split-right: 49.5%;
+                --split-left: 50%;
+                --split-right: 50%;
             }
             
             .video-overlay {
@@ -516,9 +466,6 @@
 </head>
 <body>
 
-   <!-- ============================================
-        PREMIUM PRELOADER — FINAL
-        ============================================ -->
 <div id="preloader">
     <div class="split-bg">
         <div class="split-left"></div>
@@ -532,7 +479,6 @@
     <div class="reveal-line"></div>
 </div>
 
-    <!-- Navigation -->
     <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
         <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
             <div class="flex items-center justify-between py-6">
@@ -580,7 +526,6 @@
         </div>
     </nav>
 
-    <!-- VIDEO HERO SECTION -->
 <section class="video-hero hero-section" id="heroSection">
     <div class="video-background">
         <video 
@@ -590,6 +535,8 @@
             loop 
             playsinline
             preload="auto"
+            webkit-playsinline
+            x-webkit-airplay="allow"
         >
             <source src="assets/wilart-showcase-hd.mp4" type="video/mp4">
             <source src="assets/wilart-showcase.webm" type="video/webm">
@@ -646,7 +593,6 @@
     </div>
 </section>
 
-    <!-- Marquee Strip -->
     <div class="bg-brand-red py-4 overflow-hidden">
         <div class="marquee-track flex items-center gap-12 whitespace-nowrap">
             <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Гостиницы</span>
@@ -680,7 +626,6 @@
         </div>
     </div>
 
-    <!-- About / Stats Section -->
     <section id="about" class="bg-brand-black py-24 lg:py-32 relative">
         <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20">
@@ -737,7 +682,6 @@
         </div>
     </section>
 
-    <!-- Production Video Section -->
     <section id="production" class="production-video-section">
         <div class="production-video-background">
             <video 
@@ -746,7 +690,9 @@
                 muted 
                 loop 
                 playsinline
-                preload="metadata"
+                preload="auto"
+                webkit-playsinline
+                x-webkit-airplay="allow"
             >
                 <source src="assets/production.mp4" type="video/mp4">
                 <source src="assets/production.webm" type="video/webm">
@@ -806,7 +752,6 @@
         </div>
     </section>
 
-    <!-- Services Section -->
 <section class="bg-brand-dark py-24 lg:py-32 relative">
     <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
         <div class="text-center mb-20 reveal">
@@ -899,7 +844,6 @@
     </div>
 </section>
 
-    <!-- Projects / Cases Section -->
     <section id="projects" class="bg-brand-black py-24 lg:py-32">
         <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
             <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-20 gap-6">
@@ -1033,7 +977,6 @@
         </div>
     </section>
 
-    <!-- Process Section -->
     <section id="process" class="bg-brand-dark py-24 lg:py-32 relative">
         <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
             <div class="text-center mb-20 reveal">
@@ -1090,7 +1033,6 @@
         </div>
     </section>
 
-    <!-- Clients Marquee -->
     <section id="clients" class="bg-brand-black py-16 border-y border-white/5">
         <div class="max-w-[1440px] mx-auto px-6 lg:px-12 mb-12">
             <div class="flex items-center justify-center gap-4 reveal">
@@ -1117,7 +1059,6 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
     <section class="bg-brand-dark py-24 lg:py-32">
         <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
             <div class="text-center mb-20 reveal">
@@ -1183,7 +1124,6 @@
         </div>
     </section>
 
-    <!-- Final CTA Section -->
     <section id="contact" class="bg-brand-black py-24 lg:py-32 relative overflow-hidden">
         <div class="absolute inset-0">
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-red/5 rounded-full blur-[200px]"></div>
@@ -1260,7 +1200,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-brand-dark border-t border-white/5 py-16">
         <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
@@ -1312,7 +1251,6 @@
         </div>
     </footer>
 
-    <!-- Mobile Sticky CTA -->
     <div id="stickyCta" class="sticky-cta fixed bottom-0 left-0 w-full bg-brand-black/95 backdrop-blur-xl border-t border-white/10 p-4 z-50 lg:hidden">
         <div class="flex gap-3">
             <a href="tel:+78001234567" class="flex-1 bg-brand-darker flex items-center justify-center gap-2 py-4 text-sm font-medium text-white">
@@ -1327,9 +1265,6 @@
     </div>
 
     <script>
-        // ============================================
-        // PREMIUM PRELOADER ANIMATION — FINAL
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             const preloader = document.getElementById('preloader');
             const logo = document.getElementById('preloaderLogo');
@@ -1338,46 +1273,38 @@
             const heroSection = document.getElementById('heroSection');
             const navbar = document.getElementById('navbar');
 
-            // Этап 1: Логотип и свечение появляются
             setTimeout(() => {
                 logo.classList.add('visible');
                 logoGlow.classList.add('visible');
             }, 100);
 
-            // Этап 2: Подзаголовок
             setTimeout(() => {
                 subtitle.classList.add('visible');
             }, 700);
 
-            // Этап 3: Лазерная линия
             setTimeout(() => {
                 preloader.classList.add('reveal');
             }, 1500);
 
-            // Этап 4: Разъезд половин
             setTimeout(() => {
                 preloader.classList.add('split');
             }, 2500);
 
-            // Этап 5: Прелоадер исчезает
             setTimeout(() => {
                 preloader.classList.add('hidden-preloader');
             }, 3700);
 
-            // Этап 6: Hero и навбар появляются
             setTimeout(() => {
                 preloader.style.display = 'none';
                 heroSection.classList.add('visible');
                 navbar.classList.add('visible');
             }, 3900);
 
-            // Этап 7: ВАУ-ЭФФЕКТ — заголовок hero плавно поднимается
             setTimeout(() => {
                 heroSection.classList.add('animated');
             }, 4200);
         });
 
-        // Scroll reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1388,7 +1315,6 @@
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Counter animation
         const counterObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1412,17 +1338,19 @@
 
         document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
-        // Hero Video
         const heroVideo = document.getElementById('heroVideo');
         if (heroVideo) {
-            heroVideo.addEventListener('error', () => {
-                console.log('Hero video error, fallback to static background');
-            });
-
+            const playVideo = () => {
+                heroVideo.play().catch(() => {});
+            };
+            
+            window.addEventListener('load', playVideo);
+            document.addEventListener('touchstart', playVideo, { once: true });
+            
             const heroVideoObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        heroVideo.play().catch(() => {});
+                        playVideo();
                     } else {
                         heroVideo.pause();
                     }
@@ -1432,17 +1360,19 @@
             heroVideoObserver.observe(heroVideo);
         }
 
-        // Production Video
         const productionVideo = document.getElementById('productionVideo');
         if (productionVideo) {
-            productionVideo.addEventListener('error', () => {
-                console.log('Production video error');
-            });
-
+            const playProductionVideo = () => {
+                productionVideo.play().catch(() => {});
+            };
+            
+            window.addEventListener('load', playProductionVideo);
+            document.addEventListener('touchstart', playProductionVideo, { once: true });
+            
             const productionVideoObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        productionVideo.play().catch(() => {});
+                        playProductionVideo();
                     } else {
                         productionVideo.pause();
                     }
@@ -1452,7 +1382,6 @@
             productionVideoObserver.observe(productionVideo);
         }
 
-        // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
@@ -1463,7 +1392,6 @@
             }
         });
 
-        // Mobile menu
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         mobileMenuBtn.addEventListener('click', () => {
@@ -1477,7 +1405,6 @@
             });
         });
 
-        // Sticky CTA
         const stickyCta = document.getElementById('stickyCta');
         const stickyObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1523,11 +1450,3 @@
 </body>
 </html>
 
-
-
-              <script>
-                              
-              </script>
-                        </body>
-                        </html>
-                    
