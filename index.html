@@ -1,31 +1,4 @@
-
-                        <!DOCTYPE html>
-                        <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <style>
-                body {
-                  background-color: white; /* Ensure the iframe has a white background */
-                }
-
-                background: linear-gradient(
-    90deg,
-    transparent, #d91e25, #ffffff, #d91e25, transparent
-);
-box-shadow: 
-    0 0 20px rgba(217, 30, 37, 0.6),
-    0 0 40px rgba(217, 30, 37, 0.3),
-    0 0 60px rgba(217, 30, 37, 0.15);
-
-filter: blur(40px);
-opacity: 0.15;
-
-
-              </style>
-                        </head>
-                        <body>
-                            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -79,13 +52,14 @@ opacity: 0.15;
         ::-webkit-scrollbar-thumb:hover { background: #555; }
 
         /* ============================================
-           PREMIUM PRELOADER — v2 (Art Director Edition)
+           PREMIUM PRELOADER — v3 (Art Director Final)
+           СЛЕВА БЕЛЫЙ | СПРАВА ЧЁРНЫЙ
            ============================================ */
         #preloader {
             position: fixed;
             inset: 0;
             z-index: 100;
-            background: #111111;
+            background: #ffffff;
             overflow: hidden;
             transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1);
         }
@@ -101,25 +75,25 @@ opacity: 0.15;
             z-index: 1;
         }
 
-        /* СЛЕВА — ЧЁРНЫЙ С ТЕКСТУРОЙ МАТЕРИАЛА */
+        /* СЛЕВА — БЕЛЫЙ С ТЕКСТУРОЙ МАТЕРИАЛА */
         .split-left {
-            width: 50%;
-            height: 100%;
-            background: #111111;
-            background-image: 
-                linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 50%),
-                radial-gradient(circle at 30% 50%, rgba(196, 26, 32, 0.03) 0%, transparent 60%);
-            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
-        }
-
-        /* СПРАВА — БЕЛЫЙ С ТЕКСТУРОЙ МАТЕРИАЛА */
-        .split-right {
             width: 50%;
             height: 100%;
             background: #ffffff;
             background-image: 
                 linear-gradient(135deg, rgba(0,0,0,0.03) 0%, transparent 50%),
-                radial-gradient(circle at 70% 50%, rgba(0,0,0,0.02) 0%, transparent 60%);
+                radial-gradient(circle at 30% 50%, rgba(0,0,0,0.015) 0%, transparent 60%);
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        /* СПРАВА — ЧЁРНЫЙ С ТЕКСТУРОЙ МАТЕРИАЛА */
+        .split-right {
+            width: 50%;
+            height: 100%;
+            background: #111111;
+            background-image: 
+                linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(196, 26, 32, 0.03) 0%, transparent 60%);
             transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
@@ -143,15 +117,15 @@ opacity: 0.15;
             gap: 28px;
         }
 
-        /* Красное свечение под логотипом (глубина) */
+        /* Красное свечение под логотипом (глубина как у Apple/Aesop) */
         .logo-glow {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -40%);
-            width: 280px;
-            height: 280px;
-            background: radial-gradient(circle, rgba(217, 30, 37, 0.15) 0%, transparent 70%);
+            transform: translate(-50%, -30%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(217, 30, 37, 0.12) 0%, transparent 70%);
             filter: blur(40px);
             opacity: 0;
             transition: opacity 1.2s ease;
@@ -162,7 +136,7 @@ opacity: 0.15;
             opacity: 1;
         }
 
-        /* УМЕНЬШЕННЫЙ ЛОГОТИП — воздух = премиальность */
+        /* ЛОГОТИП — воздух = премиальность */
         .preloader-logo {
             height: 220px;
             width: auto;
@@ -170,7 +144,7 @@ opacity: 0.15;
             object-fit: contain;
             opacity: 0;
             
-            /* ТОЧНЫЙ СДВИГ для совмещения линий (850px ширина, линия на 445px) */
+            /* ТОЧНЫЙ СДВИГ: ширина 850px, линия на 445px, центр 425px → сдвиг -20px */
             --logo-nudge: -20px;
             
             transform: translateY(20px) translateX(var(--logo-nudge));
@@ -195,13 +169,14 @@ opacity: 0.15;
             position: relative;
             z-index: 11;
             font-weight: 400;
+            white-space: nowrap;
         }
         .preloader-subtitle.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* КРАСНАЯ ЛИНИЯ — ЛАЗЕР РАСКРОЕЧНОГО СТАНКА */
+        /* ЛАЗЕРНАЯ ЛИНИЯ РАСКРОЕЧНОГО СТАНКА */
         .reveal-line {
             position: absolute;
             top: 50%;
@@ -228,6 +203,7 @@ opacity: 0.15;
             width: 100%;
         }
 
+        /* Hero fade-in */
         .hero-section {
             opacity: 0;
             transform: translateY(20px);
@@ -238,13 +214,12 @@ opacity: 0.15;
             transform: translateY(0);
         }
 
-        /* Анимация появления контента hero после прелоадера */
+        /* ВАУ-ЭФФЕКТ: контент hero появляется последовательно */
         .hero-section .content-reveal {
             opacity: 0;
             transform: translateY(40px);
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
                         transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-            transition-delay: 0s;
         }
         .hero-section.animated .content-reveal {
             opacity: 1;
@@ -262,27 +237,18 @@ opacity: 0.15;
             opacity: 1;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        /* ============================================
+           ОСТАВШИЕСЯ АНИМАЦИИ (только используемые)
+           ============================================ */
         @keyframes shimmer {
             0% { background-position: -200% 0; }
             100% { background-position: 200% 0; }
         }
-        @keyframes contentReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
 
-        .animate-fadeInUp { animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .animate-fadeIn { animation: fadeIn 1.2s ease-out forwards; }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
 
         .reveal {
             opacity: 0;
@@ -351,22 +317,15 @@ opacity: 0.15;
             box-shadow: 0 10px 40px rgba(196, 26, 32, 0.3);
         }
 
-        .nav-link {
-            position: relative;
-        }
+        .nav-link { position: relative; }
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 1px;
+            bottom: -4px; left: 0; width: 0; height: 1px;
             background: #c41a20;
             transition: width 0.3s ease;
         }
-        .nav-link:hover::after {
-            width: 100%;
-        }
+        .nav-link:hover::after { width: 100%; }
 
         .img-placeholder {
             background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
@@ -391,63 +350,38 @@ opacity: 0.15;
             transform: translateY(100%);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .sticky-cta.visible {
-            transform: translateY(0);
-        }
+        .sticky-cta.visible { transform: translateY(0); }
 
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .marquee-track {
-            animation: marquee 30s linear infinite;
-        }
+        .marquee-track { animation: marquee 30s linear infinite; }
 
-        /* Video Hero Styles */
+        /* Video Hero */
         .video-hero {
             position: relative;
             min-height: 100vh;
             overflow: hidden;
         }
-
         .video-background {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
+            top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
         }
-
         .video-background video {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             transform: scale(1.05);
         }
-
         .video-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(
-                135deg, 
-                rgba(10, 10, 10, 0.85) 0%, 
-                rgba(10, 10, 10, 0.6) 50%, 
-                rgba(10, 10, 10, 0.75) 100%
-            );
+            background: linear-gradient(135deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.6) 50%, rgba(10,10,10,0.75) 100%);
             z-index: 1;
         }
-
         .video-overlay::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             height: 40%;
-            background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent);
+            background: linear-gradient(to top, rgba(10,10,10,0.9), transparent);
         }
-
         .video-content {
             position: relative;
             z-index: 10;
@@ -458,40 +392,26 @@ opacity: 0.15;
             padding-top: 80px;
         }
 
-        /* Production Video Section */
+        /* Production Video */
         .production-video-section {
             position: relative;
             height: 600px;
             overflow: hidden;
         }
-
         .production-video-background {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
+            top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
         }
-
         .production-video-background video {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
         }
-
         .production-video-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(10, 10, 10, 0.9) 0%,
-                rgba(10, 10, 10, 0.7) 50%,
-                rgba(10, 10, 10, 0.9) 100%
-            );
+            background: linear-gradient(to bottom, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.7) 50%, rgba(10,10,10,0.9) 100%);
             z-index: 1;
         }
-
         .production-video-content {
             position: relative;
             z-index: 10;
@@ -504,34 +424,31 @@ opacity: 0.15;
             padding: 0 24px;
         }
 
-        /* Mobile Adaptations */
+        /* ============================================
+           MOBILE ADAPTATIONS
+           ============================================ */
         @media (max-width: 768px) {
             .video-overlay {
-                background: linear-gradient(
-                    135deg, 
-                    rgba(10, 10, 10, 0.9) 0%, 
-                    rgba(10, 10, 10, 0.75) 100%
-                );
+                background: linear-gradient(135deg, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.75) 100%);
             }
-            
             .video-content {
                 padding-top: 100px;
                 padding-bottom: 60px;
             }
 
-            /* Логотип на мобильных — пропорционально уменьшен */
+            /* Логотип на мобильных */
             .preloader-logo { 
                 height: 140px; 
+                max-width: 85vw;
             }
             .preloader-subtitle { 
                 font-size: 8px; 
-                letter-spacing: 0.25em; 
+                letter-spacing: 0.2em; 
             }
             .logo-glow {
-                width: 180px;
-                height: 180px;
+                width: 200px;
+                height: 200px;
             }
-            
             .logo-container {
                 gap: 20px;
             }
@@ -547,36 +464,24 @@ opacity: 0.15;
         }
 
         @media (hover: none) and (pointer: coarse) {
-            .premium-card:hover {
-                transform: none;
-            }
-            .premium-card:hover .card-image {
-                transform: none;
-            }
-            .premium-card:hover .card-overlay {
-                opacity: 1;
-            }
-            .btn-premium:hover {
-                transform: none;
-            }
+            .premium-card:hover { transform: none; }
+            .premium-card:hover .card-image { transform: none; }
+            .premium-card:hover .card-overlay { opacity: 1; }
+            .btn-premium:hover { transform: none; }
         }
 
         @supports (-webkit-touch-callout: none) {
-            .video-hero {
-                min-height: -webkit-fill-available;
-            }
+            .video-hero { min-height: -webkit-fill-available; }
         }
 
-        a, button {
-            min-height: 44px;
-            min-width: 44px;
-        }
+        a, button { min-height: 44px; min-width: 44px; }
     </style>
 </head>
 <body>
 
    <!-- ============================================
-        PREMIUM PRELOADER — v2
+        PREMIUM PRELOADER — v3
+        СЛЕВА БЕЛЫЙ | СПРАВА ЧЁРНЫЙ
         ============================================ -->
 <div id="preloader">
     <div class="split-bg">
@@ -796,9 +701,7 @@ opacity: 0.15;
         </div>
     </section>
 
-    <!-- ============================================
-         PRODUCTION VIDEO SECTION
-         ============================================ -->
+    <!-- Production Video Section -->
     <section id="production" class="production-video-section">
         <div class="production-video-background">
             <video 
@@ -846,7 +749,6 @@ opacity: 0.15;
                 </div>
             </div>
 
-            <!-- Production Stats -->
             <div class="reveal reveal-delay-2 grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-8 border-t border-white/10 max-w-4xl mx-auto">
                 <div class="text-center">
                     <div class="font-serif text-3xl sm:text-4xl text-white mb-2">5000+</div>
@@ -1390,7 +1292,7 @@ opacity: 0.15;
 
     <script>
         // ============================================
-        // PREMIUM PRELOADER ANIMATION — v2
+        // PREMIUM PRELOADER ANIMATION — v3
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             const preloader = document.getElementById('preloader');
@@ -1411,7 +1313,7 @@ opacity: 0.15;
                 subtitle.classList.add('visible');
             }, 700);
 
-            // Этап 3: Красная линия-лазер
+            // Этап 3: Лазерная линия
             setTimeout(() => {
                 preloader.classList.add('reveal');
             }, 1500);
@@ -1550,7 +1452,7 @@ opacity: 0.15;
                 }
             });
         }, { threshold: 0.3 });
-        stickyObserver.observe(heroSection);
+        stickyObserver.observe(document.getElementById('heroSection'));
 
         function scrollToContact() {
             document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1585,11 +1487,3 @@ opacity: 0.15;
 </body>
 </html>
 
-
-
-              <script>
-                              
-              </script>
-                        </body>
-                        </html>
-                    
