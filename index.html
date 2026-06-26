@@ -1,4 +1,24 @@
-<!DOCTYPE html>
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+
+                :root {
+    --split-left: 50.5%;
+    --split-right: 49.5%;
+}
+
+
+              </style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -52,10 +72,15 @@
         ::-webkit-scrollbar-thumb:hover { background: #555; }
 
         /* ============================================
-           PREMIUM PRELOADER — v3 FINAL
-           СЛЕВА БЕЛЫЙ (52.35%) | СПРАВА ЧЁРНЫЙ (47.65%)
-           Линия разделения совпадает с линией логотипа (445px из 850px)
+           PREMIUM PRELOADER — FINAL
+           СЛЕВА БЕЛЫЙ (50.5%) | СПРАВА ЧЁРНЫЙ (49.5%)
+           Линия разделения совпадает с линией логотипа
            ============================================ */
+        :root {
+            --split-left: 50.5%;
+            --split-right: 49.5%;
+        }
+
         #preloader {
             position: fixed;
             inset: 0;
@@ -76,9 +101,9 @@
             z-index: 1;
         }
 
-        /* СЛЕВА — БЕЛЫЙ (52.35% = 445px из 850px ширины логотипа) */
+        /* СЛЕВА — БЕЛЫЙ (50.5%) */
         .split-left {
-            width: 50.5%;
+            width: var(--split-left);
             height: 100%;
             background: #ffffff;
             background-image: 
@@ -87,9 +112,9 @@
             transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        /* СПРАВА — ЧЁРНЫЙ (47.65%) */
+        /* СПРАВА — ЧЁРНЫЙ (49.5%) */
         .split-right {
-            width: 49.5%;
+            width: var(--split-right);
             height: 100%;
             background: #111111;
             background-image: 
@@ -476,8 +501,8 @@
 <body>
 
    <!-- ============================================
-        PREMIUM PRELOADER — v3 FINAL
-        СЛЕВА БЕЛЫЙ (52.35%) | СПРАВА ЧЁРНЫЙ (47.65%)
+        PREMIUM PRELOADER — FINAL
+        СЛЕВА БЕЛЫЙ (50.5%) | СПРАВА ЧЁРНЫЙ (49.5%)
         ============================================ -->
 <div id="preloader">
     <div class="split-bg">
@@ -636,7 +661,7 @@
             <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Ресепшен</span>
             <span class="text-white/40"></span>
             <span class="text-white/90 text-sm tracking-[0.5em] uppercase font-medium">Лобби</span>
-            <span class="text-white/40">✦</span>
+            <span class="text-white/40"></span>
         </div>
     </div>
 
@@ -1288,7 +1313,7 @@
 
     <script>
         // ============================================
-        // PREMIUM PRELOADER ANIMATION — v3 FINAL
+        // PREMIUM PRELOADER ANIMATION — FINAL
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             const preloader = document.getElementById('preloader');
@@ -1482,3 +1507,12 @@
     </script>
 </body>
 </html>
+
+
+
+              <script>
+                              
+              </script>
+                        </body>
+                        </html>
+                    
